@@ -10,7 +10,7 @@
 <body>
 <p>Hello World</p>
 <p> <div>This is my div crap</div></p>
-<a href="/content/creaturesncharacters.php">To the creatures</a>
+<a href="./content/creaturesncharacters.php">To the creatures</a>
 <div>Things that I am attempting<br>
     <ul id="mainMenu">
         <li>Attempting a box</li>
