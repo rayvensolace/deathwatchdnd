@@ -60,12 +60,19 @@ footer{
 }
 
 .listSurround{
+    background: rgba(250,250,250,0.1);
+    border-style: outset;
+    border-color: azure;
+    border-width: 2px;
     padding: 3px;
     margin: 3px;
 }
 
 .currentSurround{
-    background: rgba(0,0,0,0.5);
+    background: rgba(50,50,50,0.3);
+    border-style: inset;
+    border-color: azure;
+    border-width: 2px;
     padding: 3px;
     margin: 3px;
 }
@@ -78,9 +85,10 @@ footer{
     margin: 3px;
 }
 
-#landingHeader{
-    background-color:green;
-    text-shadow: blue;
+#landingBar{
+    background-color:#058829;
+    border-color: #419b4d;
+    border-style: ridge;
 }
 
 #campaignBar{
