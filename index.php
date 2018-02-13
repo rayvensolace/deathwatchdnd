@@ -1,4 +1,6 @@
-<?php  ?>
+<?php
+    echo print_r($_POST, 1)
+?>
 <header>
     <meta charset="UTF-8">
     <title>Hello World</title>
