@@ -2,6 +2,10 @@ footer{
     background:silver;
 }
 
+li{
+    padding: 2%
+}
+
 #id {
     background-color:green;
     height: 50px;
@@ -14,16 +18,19 @@ footer{
 
 .mainMenu {
     display: inline-flex;
-
+    min-width: 750px;
+    width: 100%
 }
 
 .centerList{
     position: static;
     margin: 0 auto;
-    width: 50%;
+    flex: auto;
+    width: 10%;
 }
 
 .inlineList{
+    float: inside;
     position: center;
     display: inline-flex;
     list-style: none;
@@ -40,6 +47,31 @@ footer{
     margin: 5px 5px;
 }
 
+.dualPaneContent{
+    display:flex;
+    min-width: 100%;
+}
+.basicInfoSlider{
+    max-width: 20%;
+    min-width: 239px;
+}
+
+.creatureContent{
+    max-width: 80%;
+    min-width: 489px;
+}
+
+.inlinePane{
+    float:left;
+    flex: 1; /* additionally, equal width */
+    color: silver;
+    padding: 5px;
+    border: solid;
+    border-width: 2px;
+    border-color: silver;
+    width: 100px;
+}
+
 .header::image{
     background-image: opacity= 0.5, url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2424931.jpg");
     background-repeat: repeat-x;
@@ -52,6 +84,7 @@ footer{
     min-height: 50px;
     height: 5%;
     width: 100%;
+    min-width: 750px;
     font-size: 40px;
     padding: 5px 0px;
     overflow: hidden;
@@ -78,11 +111,18 @@ footer{
 }
 
 .travelList{
-    background-color: black;
+    background-color: rgba(0,0,0,0.7);
     opacity: 1;
     color: silver;
     padding: 3px;
     margin: 3px;
+}
+.travelBar{
+    min-width: 750px;
+}
+
+.footer{
+    background:linear-gradient(darkslategray, silver, darkslategrey);
 }
 
 #landingBar{
@@ -92,20 +132,20 @@ footer{
 }
 
 #campaignBar{
-    background-color:blue;
-    text-shadow: crimson;
+    background:linear-gradient(to bottom right, darkblue, cadetblue);
+    border-color: aqua;
     border-style: ridge;
 }
 
 #videoBar {
-    background-color:#61bb6d;
+    background: linear-gradient(to bottom right,#41ab4d,#004b00 );
     border-color: #419b4d;
     border-style: ridge;
     text-shadow: blue;
 }
 
 #creatureBar{
-    background-color: #cc1436;
+    background: linear-gradient(to bottom right,#cc1436, #4c0000);
     border-color: #ac0016;
     border-style: ridge;
     text-shadow: green;
@@ -113,7 +153,8 @@ footer{
 
 .creatureBackground{
     background: url(https://hoiabaciuforest.com/wp-content/uploads/2012/11/Truth-about-the-Hoia-Baciu-Forest-an-area-on-Earth-created-55000-years-ago-by-Atlanta.jpg);
-    backgroundSize:100%
+    backgroundSize:100%;
+    min-width: 755px;
     background-repeat: repeat-y;
     background-position: center;
     background-size: cover;
