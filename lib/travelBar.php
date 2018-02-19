@@ -1,13 +1,15 @@
 <div <?php if ($thisPage=="CreaturesNCharacters"){
-    echo " id=\"creatureBar\" class=\"travelBar\"> " ;
+    echo " id=\"creatureBar\" class=\"widthDiv\"> " ;
 }else if ($thisPage=="Campaigns"){
-    echo " id=\"campaignBar\" class=\"travelBar\"> ";
+    echo " id=\"campaignBar\" class=\"widthDiv\"> ";
 }else if ($thisPage=="Videos"){
-    echo "id=\"videoBar\" class=\"travelBar\">";
+    echo "id=\"videoBar\" class=\"widthDiv\">";
 }else if ($thisPage=="Landing"){
-    echo "id=\"landingBar\" class=\"travelBar\">";
+    echo "id=\"landingBar\" class=\"widthDiv\">";
 }?>
-<div class="centerList">
+<div class="widthDiv">
+<div class="inlineContainer"></div>
+<div class="centerDiv">
 <ol class="inlineList">
     <?php if ($thisPage=="Landing") {
         echo "<li> <div class=\"listSurround\"><a href=\"/content/Campaigns.php\"><div class=\"travelList\" >Visit as Guest</div></a></div></li> ";
@@ -26,8 +28,11 @@
         echo "<li> <div class=\"currentSurround\"><div class=\"travelList\">Videos</div></a></div></li>";
     }
 ?>
-</div>
 </ol>
+</div>
+<div class="inlineContainer"></div>
+    <button id="loginButton" class="rightDiv" onclick="href="form.html" type="button">Login</button>
+</div>
 </div>
 
 

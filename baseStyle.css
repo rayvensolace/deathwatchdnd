@@ -6,39 +6,68 @@ li{
     padding: 2%
 }
 
-#id {
-    background-color:green;
-    height: 50px;
-    width: 50px;
-    border: thick;
-    margin: 15px;
-    padding: 10px;
-    float-displace: line;
-}
-
-.mainMenu {
+.centerDiv{
+    margin: 0;
     display: inline-flex;
-    min-width: 750px;
-    width: 100%
+    justify-content: center;
 }
 
-.centerList{
+.leftDiv{
+    float: left;
     position: static;
-    margin: 0 auto;
+    display: inline-flex;
+}
+
+.rightDiv{
+    float: right;
+    position: sticky;
+    display: inline-flex;
+}
+
+.bottomDiv{
+    align-self: end;
+    position: static;
+}
+
+.topDiv{
+    float: top;
+    position: sticky;
+}
+
+.widthDiv{
+    display: inline-flex;
+    width: 100%;
+    min-width: 750px;
+}
+
+.lengthAdjustable{
+    height: 100%;
+    justify-content: safe;
+    overflow-y:auto;
+}
+
+.inlineContainer{
+    display:inline-flex;
     flex: auto;
-    width: 10%;
+    list-style: none;
+}
+
+.leftFloat{
+    position: left;
+    display: inline;
 }
 
 .inlineList{
-    float: inside;
-    position: center;
+    justify-content: center;
+    flex: fit-content;
+    float: left;
     display: inline-flex;
     list-style: none;
-    align: middle;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 #loginButton{
-    float: right;
     font: helvitica;
     color: black;
     background-color: silver;
@@ -48,33 +77,29 @@ li{
 }
 
 .dualPaneContent{
-    display:flex;
-    min-width: 100%;
+    /*display: inline-flex;*/
+    justify-content: safe ;
 }
+
 .basicInfoSlider{
-    max-width: 20%;
-    min-width: 239px;
+    width: 11%;
+    min-width: 158px;
 }
 
 .creatureContent{
-    max-width: 80%;
-    min-width: 489px;
+    width: 89%;
+    min-width: 579px;
 }
 
 .inlinePane{
     float:left;
-    flex: 1; /* additionally, equal width */
+    /*flex: 0; !* additionally, equal width *!*/
     color: silver;
     padding: 5px;
     border: solid;
     border-width: 2px;
     border-color: silver;
-    width: 100px;
-}
-
-.header::image{
-    background-image: opacity= 0.5, url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2424931.jpg");
-    background-repeat: repeat-x;
+    overflow-y: auto;
 }
 
 .header {
@@ -82,30 +107,31 @@ li{
     text-align: center;
     color: silver;
     min-height: 50px;
-    height: 5%;
-    width: 100%;
-    min-width: 750px;
+    height: 3%;
     font-size: 40px;
     padding: 5px 0px;
     overflow: hidden;
-    background: rgba(204,04,54,0.9) ;
-    background: rgba(255,255,255,0.1)  url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2424931.jpg") repeat-x ;
+    flex: auto;
+    width:100%
 }
 
 .listSurround{
     background: rgba(250,250,250,0.1);
-    border-style: outset;
+    border-style: ridge;
     border-color: azure;
     border-width: 2px;
+    border-radius: 2px;
     padding: 3px;
     margin: 3px;
+    text-decoration: none;
 }
 
 .currentSurround{
-    background: rgba(50,50,50,0.3);
+    background: rgba(250,250,250,0.5);
     border-style: inset;
     border-color: azure;
     border-width: 2px;
+    border-radius: 2px;
     padding: 3px;
     margin: 3px;
 }
@@ -116,17 +142,99 @@ li{
     color: silver;
     padding: 3px;
     margin: 3px;
-}
-.travelBar{
-    min-width: 750px;
+    width: 150px;
+    text-align: center;
+    border-radius: 2px;
 }
 
 .footer{
     background:linear-gradient(darkslategray, silver, darkslategrey);
 }
 
+.createButton{
+    font: helvitica;
+    color: black;
+    background-color: silver;
+    height: 40px;
+    margin: 2.5%;
+    align-self: flex-end;
+    width: 95%
+}
+
+.campaignTop{
+    flex: fit-content;
+    width: 100%;
+    height: 450px;
+    /*border: solid silver;*/
+}
+
+.campaignTopLeft {
+    color: black;
+    background: linear-gradient(to bottom right, #d0d0d5, #b0b0dc);
+    border-color: silver;
+    border-style: ridge;
+    border-radius: 4px;
+    width: 45%;
+    height: 95%;
+    margin: 2.5%;
+}
+
+.campaignNotes{
+    color: black;
+    background: linear-gradient(to bottom right, #c0c0cc, #8080aa);
+    border: inset silver;
+    border-radius: 4px;
+    width: 45%;
+    height: 95%;
+    margin: 2.5%;
+
+}
+
+.tileContainer{
+    color: black;
+    background: linear-gradient(to bottom right, #c0c0cc, #8080aa);
+    border: inset silver;
+    border-radius: 10px;
+    width: 45%;
+    margin: 2.2%;
+    margin-top: 25px;
+    min-height: 244px;
+    position: relative;
+    max-width: 700px;
+}
+
+.tileContainer:before{
+    content: "content";
+    display: block;
+    padding-top: 60% 	/* initial ratio of 1:1*/
+}
+
+.listItem{
+    width: 90%;
+    margin: 5%;
+
+}
+
+.monstersContainer{
+    padding 2.5%;
+    width: 100%;
+    display: flex;
+    justify-items: auto;
+    flex-flow: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+#landingHeader{
+    background: linear-gradient(to bottom right,#41ab4d,#004b00 );
+    border-color: #419b4d;
+    border-style: ridge;
+    text-shadow: blue;
+}
+
 #landingBar{
-    background-color:#058829;
+    background: linear-gradient(to bottom right,#41ab4d,#004b00 );
     border-color: #419b4d;
     border-style: ridge;
 }
@@ -158,4 +266,6 @@ li{
     background-repeat: repeat-y;
     background-position: center;
     background-size: cover;
+    border-color: #004b00;
+    border-style: groove;
 }
