@@ -17,7 +17,7 @@ $thisPage = "CreaturesNCharacters";
                         createCheckboxList($list);
                     ?>
             </form>
-            <button class="createButton" onclick=" href="campaignForm.html" type="button">Create Creature or Character</button>
+            <a href="../forms/createCreature.php"><button class="createButton" onclick="" type="button">Create Creature or Character</button></a>
         </div>
         <div class="creatureContent inlinePane lengthAdjustable">
             <div class="widthDiv filterBar">

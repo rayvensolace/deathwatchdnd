@@ -31,8 +31,8 @@
                     ?>
                 </form>
             </div>
-            <button class="createButton" onclick=" href="campaignForm.html" type="button">Create Campaign Location</button>
-            <button class="createButton" onclick=" href="campaignForm.html" type="button">Create Campaign Section</button>
+            <a href="../forms/createLocation.php"><button class="createButton" type="button">Create Campaign Location</button></a>
+            <a href="../forms/createCampaignSection.php"><button class="createButton" onclick="document.location.href='../forms/createCampaignSection.php' type="button">Create Campaign Section</button></a>
         </div>
         <div class="creatureContent inlinePane">
             <div class="topDiv campaignTop" style="display:inline-flex">
@@ -67,10 +67,10 @@
                         <div class="inlineContainer widthDiv internalTile">
                             <div class="descriptionColumn">
                                 <ol class="dataList">
-                                    Enemies:<br>
+                                    Enemies:<p>
                                     <?php
                                     $list;
-                                    for($i = 1; $i < 20 ; $i++){
+                                    for($i = 1; $i < 18 ; $i++){
                                         $list[$i] = "Enemy ".$i;
                                     }
                                     createVerticalList($list);
@@ -78,7 +78,7 @@
                                 </ol>
                             </div>
                             <div class="notesColumn">
-                                Notes:<br> A mountain acrodectes peak castle peak debauch mountain pb dolores peak hayfork bally iron mountain kootenai peak loma prieta mcdonald peak mount bolivar mount davis mount gabb mount lamlam mount princeton mount ritter san benito mountain thimble peak vulture peak west elk peak whitewater baldy wire mountain. Bonanza peak chair peak crane mountain crow peak kendrick peak mount baden-powell mount muir mount neacola pb mount russell pb nathaniel mountain stripe mountain taum sauk mountain west elk peak. Baldy mountain brush mountain ipasha peak keynot peak mauna loa mount prophet mount shishaldin pb navajo mountain needle rock patterson creek mountain pyramid peak sand mountain spring gap mountain.
+                                Notes:<p> A mountain acrodectes peak castle peak debauch mountain pb dolores peak hayfork bally iron mountain kootenai peak loma prieta mcdonald peak mount bolivar mount davis mount gabb mount lamlam mount princeton mount ritter san benito mountain thimble peak vulture peak west elk peak whitewater baldy wire mountain. Bonanza peak chair peak crane mountain crow peak kendrick peak mount baden-powell mount muir mount neacola pb mount russell pb nathaniel mountain stripe mountain taum sauk mountain west elk peak. Baldy mountain brush mountain ipasha peak keynot peak mauna loa mount prophet mount shishaldin pb navajo mountain needle rock patterson creek mountain pyramid peak sand mountain spring gap mountain.
                             </div>
                         </div>
                     <div class="thinForm">Popout Button</div>
@@ -88,7 +88,7 @@
                 <div class="tilesContainer bottomDiv">
                     <?php
                     $creatureList;
-                    for($i = 0; $i < 20; $i++){
+                    for($i = 0; $i < 18; $i++){
                         $creature = ['creatureName' => "Monster Name ". $i];
                         $creatureList[$i] = $creature;
                     }
