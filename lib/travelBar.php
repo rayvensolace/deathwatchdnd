@@ -31,7 +31,11 @@
 </ol>
 </div>
 <div class="inlineContainer"></div>
-    <button id="loginButton" class="rightDiv" onclick="href="form.html" type="button">Login</button>
+    <?php
+    if ($thisPage != "Landing"){
+        echo "<button id=\"loginButton\" class=\"rightDiv\" onclick=\"href=\"form.html\" type=\"button\">Login</button>";
+    }
+    ?>
 </div>
 </div>
 

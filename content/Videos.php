@@ -23,17 +23,33 @@ $thisPage = "Videos";
             </form>
         </div>
         <div class="creatureContent inlinePane lengthAdjustable">
+            <div class="widthDiv filterBar">
+                <div class="inlineContainer"></div>
+                <div>
+                <form class="thinForm">
+                    <ul class="inlineList">
+                        <li class="filterListItem"><div>How To Guides<input type="checkbox" name="howTo" value="howTo"></div></li>
+                        <li class="filterListItem"><div>Game Sessions<input type="checkbox" name="sessions" value="howTo"></div></li>
+                    </ul>
+                </form>
+                </div>
+                <div class="inlineContainer"></div>
+            </div>
             Right Pane
-            <div class="monstersContainer bottomDiv">
+            <div class="tilesContainer bottomDiv">
                 <?php
-                createTile();
-                createTile();
-                createTile();
-                createTile();
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
                 ?>
             </div>
         </div>
     </div>
     <?php
     include_once ("../lib/footer.php");
-       ?>
+       ?>http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png

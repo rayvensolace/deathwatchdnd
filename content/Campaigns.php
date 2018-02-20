@@ -42,19 +42,40 @@
         <div class="creatureContent inlinePane">
             <div class="topDiv campaignTop" style="display:inline-flex">
                 <div class="campaignTopLeft">
-                    campaign text
+                    Campaign text
                 </div>
                 <div class="campaignNotes">
-                Campaign notes
+                    <div class="widthDiv filterBar">
+                    <div class="inlineContainer"></div>
+                        <div class="centerDiv">
+                            <form class="thinForm">
+                                <select class="filterDropDown"  name="dropdown" >
+                                    <?php
+                                        $locationList = ['location1', 'location2', 'location3','location4', 'location5'];
+                                        createLocationsOption($locationList);
+                                    ?>
+                                </select>
+                            </form>
+                        </div>
+                        <div class="inlineContainer"></div>
+                    </div>
+                    Location stuff
                 </div>
             </div>
             <div class="lengthAdjustable">
-                <div class="monstersContainer bottomDiv">
+                <div class="tilesContainer bottomDiv">
                     <?php
-                        createTile();
-                        createTile();
-                        createTile();
-                        createTile();
+                        $list = ['a'=>'a','ab'=>'b','c'=>'c','d'=>'d','e'=>'e'];
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
+                        createCreatureTile($list);
                     ?>
                 </div>
             </div>

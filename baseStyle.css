@@ -46,6 +46,34 @@ li{
     overflow-y:auto;
 }
 
+.statColumn{
+    width: 19%;
+    height: 100%;
+    text-align: left;
+    float: left;
+    padding: 3px;
+    line-height: 13px;
+}
+
+.dataList{
+    list-style: none;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.descriptionColumn{
+    width:24%;
+    text-align:left;
+    float: left;
+}
+
+.notesColumn{
+    width: 54%;
+    text-align: left;
+    float: left;
+    overflow-y: auto;
+}
+
 .inlineContainer{
     display:inline-flex;
     flex: auto;
@@ -63,8 +91,8 @@ li{
     float: left;
     display: inline-flex;
     list-style: none;
-    margin-left: 0;
-    padding-left: 0;
+    margin: 0px 0px;
+    padding-left: 0px;
 }
 
 #loginButton{
@@ -122,7 +150,7 @@ li{
     border-width: 2px;
     border-radius: 2px;
     padding: 3px;
-    margin: 3px;
+    margin: 10px;
     text-decoration: none;
 }
 
@@ -133,7 +161,7 @@ li{
     border-width: 2px;
     border-radius: 2px;
     padding: 3px;
-    margin: 3px;
+    margin: 10px;
 }
 
 .travelList{
@@ -174,9 +202,9 @@ li{
     border-color: silver;
     border-style: ridge;
     border-radius: 4px;
-    width: 45%;
+    width: 49%;
     height: 95%;
-    margin: 2.5%;
+    margin: .5%;
 }
 
 .campaignNotes{
@@ -184,10 +212,16 @@ li{
     background: linear-gradient(to bottom right, #c0c0cc, #8080aa);
     border: inset silver;
     border-radius: 4px;
-    width: 45%;
+    width: 49%;
     height: 95%;
-    margin: 2.5%;
+    margin: .5%;
 
+}
+
+.videoImage{
+    padding-bottom: 60%;
+    height: 95%;
+    width: 95%;
 }
 
 .tileContainer{
@@ -201,12 +235,27 @@ li{
     min-height: 244px;
     position: relative;
     max-width: 700px;
+    padding: 3px;
 }
 
 .tileContainer:before{
-    content: "content";
+    /*content: "";*/
     display: block;
     padding-top: 60% 	/* initial ratio of 1:1*/
+}
+
+.internalTile{
+    display: block;
+    min-width: 345px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.titleHighlight{
+    background: linear-gradient(to bottom right, rgba(25,100,45,0.6), rgba(45,150,75,0.6));
+    max-width: 100%;
+    min-width: 100%;
+    /*background-color: rgba(25,100,45,0.6);*/
 }
 
 .listItem{
@@ -215,7 +264,7 @@ li{
 
 }
 
-.monstersContainer{
+.tilesContainer{
     padding 2.5%;
     width: 100%;
     display: flex;
@@ -223,7 +272,31 @@ li{
     flex-flow: row;
     justify-content: space-around;
     flex-wrap: wrap;
+}
 
+.filterDropDown{
+    width: 100px;
+    margin: 3px 15px;
+    background-color: lightgray;
+}
+
+.thinForm{
+    margin: 0px;
+}
+
+.filterBar{
+    background-color: rgba(100,125,125,0.8);
+    min-height: 25px;
+    color: black;
+    text-align: center;
+    min-width: 345px;
+}
+
+.filterListItem{
+    display: inline-flex;
+    flex-direction: row;
+    white-space: nowrap;
+    margin: 3px 15px;
 }
 
 #landingHeader{
