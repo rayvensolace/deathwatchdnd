@@ -8,14 +8,10 @@ include_once ("lib/tile.php");
 <div class="lengthAdjustable widthDiv creatureBackground">
     <div class="tilesContainer">
         <?php
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-            createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                    for($i = 0; $i < 20; $i++){
+                        $video = ['videoName' => "Video Image ".$i, 'httptag' => "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", 'image' => "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png"];
+                    createVideoTile($video);
+                    }
         ?>
     </div>
 </div>

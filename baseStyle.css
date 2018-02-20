@@ -52,13 +52,14 @@ li{
     text-align: left;
     float: left;
     padding: 3px;
-    line-height: 13px;
+    line-height: 14px;
 }
 
 .dataList{
     list-style: none;
     margin: 0px;
     padding-left: 5px;
+    line-height: 14px
 }
 
 .descriptionColumn{
@@ -205,6 +206,7 @@ li{
     width: 49%;
     height: 95%;
     margin: .5%;
+    overflow-y: auto;
 }
 
 .campaignNotes{

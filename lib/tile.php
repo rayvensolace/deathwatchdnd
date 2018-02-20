@@ -8,24 +8,28 @@
 }
 
 
-    function createVideoTile($videoName, $httptag, $image ){
+    function createVideoTile($videoDataArray){
+        $name = empty($videoDataArray['videoName']) ? 'Video Name':$videoDataArray['videoName'];
+        $href =empty($videoDataArray['httptag']) ? 'https://ih0.redbubble.net/image.25011287.7046/flat,800x800,070,f.u2.jpg': $videoDataArray['httptag'];
+        $src = empty($videoDataArray['image']) ? 'https://ih0.redbubble.net/image.25011287.7046/flat,800x800,070,f.u2.jpg': $videoDataArray['image'];
         echo "<div class='tileContainer'>
             <div class='inlineList widthDiv titleHighlight'>
                 <div class='inlineContainer'></div>
-                <div>$videoName</div>
+                <div>$name</div>
                 <div class='inlineContainer'></div>
             </div>
-            <div class='videoImage'><a href=$httptag>
-                    <img src:$image height:95% width: 95% >
+            <div class='videoImage'><a href=$href >
+                    <img src:$src height:95% width: 95% >
                     </a>
             </div>
         </div>";
     }
 
     function createCreatureTile($creatureArray){
+      $name = $name = empty($creatureArray['creatureName']) ? 'Monster Name':$creatureArray['creatureName'];
       echo "<div class='tileContainer'>
         <div class='inlineList thinForm widthDiv titleHighlight'>
-            <div class='inlineContainer'></div><div class='centerDiv'>Creature Name</div><div class='inlineContainer'></div>
+            <div class='inlineContainer'></div><div class='centerDiv'>$name</div><div class='inlineContainer'></div>
         </div>
             <div class='inlineList widthDiv internalTile'>
                 <div class='statColumn'>

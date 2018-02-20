@@ -7,18 +7,13 @@ $thisPage = "Videos";
     ?>
     <div class="creatureBackground widthDiv dualPaneContent" style="height: 100%">
         <div class="basicInfoSlider inlinePane lengthAdjustable">
-            Left pane
             <form>
                 <?php
-                list_item('video1');
-                list_item('video2');
-                list_item('video3');
-                list_item('video4');
-                list_item('video5');
-                list_item('video6');
-                list_item('video7');
-                list_item('video8');
-                list_item('video9');
+                $list;
+                for($i = 1; $i < 15 ; $i++){
+                $list[$i] = "Video ".$i;
+                }
+                    createCheckboxList($list);
                 ?>
             </form>
         </div>
@@ -35,17 +30,15 @@ $thisPage = "Videos";
                 </div>
                 <div class="inlineContainer"></div>
             </div>
-            Right Pane
             <div class="tilesContainer bottomDiv">
                 <?php
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
-                createVideoTile("videoImage", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png");
+                    $videos;
+                    for($i = 0; $i < 20; $i++){
+                        $video = ['videoName' => "Video Image ".$i, 'httptag' => "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png", 'image' => "http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c4f5.png"];
+                        $videos[$i] = $video;
+                        /*createVideoTile($video);*/
+                    }
+                    createTileList($videos, 'video');
                 ?>
             </div>
         </div>

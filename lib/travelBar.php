@@ -13,7 +13,8 @@
 <ol class="inlineList">
     <?php if ($thisPage=="Landing") {
         echo "<li> <div class=\"listSurround\"><a href=\"/content/Campaigns.php\"><div class=\"travelList\" >Visit as Guest</div></a></div></li> ";
-        echo "<li> <div class=\"listSurround\"><a href=\"/Form.html\"><div class=\"travelList\">Login</div></a></div></li>";
+        echo "<li> <div class=\"listSurround\"><a href=\"/signIn.html\"><div class=\"travelList\">Login</div></a></div></li>";
+        echo "<li> <div class=\"listSurround\"><a href=\"/signUp.html\"><div class=\"travelList\">Create Profile</div></a></div></li>";
     }else if ($thisPage=="CreaturesNCharacters"){
         echo "<li> <div class=\"currentSurround\"><div class=\"travelList\" >Creatures</div></div></li> ";
         echo "<li> <div class=\"listSurround\"><a href=\"/content/Campaigns.php\"><div class=\"travelList\">Campaigns</div></a></div></li>";
