@@ -164,6 +164,7 @@ li{
     border-radius: 2px;
     padding: 3px;
     margin: 10px;
+    flex: auto;
 }
 
 .travelList{
