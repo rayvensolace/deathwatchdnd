@@ -1,3 +1,6 @@
+<?php
+include_once ("../Objects/Nerd.php");
+?>
 <div <?php if ($thisPage=="CreaturesNCharacters"){
     echo " id='creatureBar' class='widthDiv'> " ;
 }else if ($thisPage=="Campaigns"){
@@ -12,7 +15,7 @@
 <div class="centerDiv">
 <ol class="inlineList">
     <?php if ($thisPage=="Landing") {
-        echo "<li> <div class='listSurround'><a href='/content/Campaigns.php'><div class='travelList' >Visit as Guest</div></a></div></li> ";
+        echo "<li> <div class='listSurround'><a href='/forms/guestLogin.php'><div class='travelList' >Visit as Guest</div></a></div></li> ";
         echo "<li> <div class='listSurround'><a href='/forms/login.php'><div class='travelList'>Login</div></a></div></li>";
         echo "<li> <div class='listSurround'><a href='/forms/createProfile.php'><div class='travelList'>Create Profile</div></a></div></li>";
     }else if ($thisPage=="CreaturesNCharacters"){
@@ -34,7 +37,15 @@
 <div class="inlineContainer"></div>
     <?php
     if ($thisPage != "Landing"){
-        echo "<button id='loginButton' class='rightDiv' onclick='href='form.html' type='button'>Login</button>";
+        if(isset($_SESSION['NERD'])){
+            $nerd = unserialize($_SESSION['NERD']);
+            echo "<div class = 'rightDiv profileName'>".  $nerd->getName() . "</div>";
+            if($nerd->getName() != 'Guest'){
+                   echo "<a href='../forms/logoutHandler.php'> <button id='loginButton' class='rightDiv' type='button'>Logout</button></a>";
+            }else{
+                    echo "<a href= '../forms/login.php'><button id='loginButton' class='rightDiv' type='button'>Login</button></a>";
+            }
+        }
     }
     ?>
 </div>

@@ -6,6 +6,10 @@ li{
     padding: 2%
 }
 
+body {
+    font-family: helvitica;
+}
+
 .centerDiv{
     margin: 0;
     display: inline-flex;
@@ -170,6 +174,7 @@ li{
 }
 
 .travelList{
+    font-family: 'Cinzel Decorative', cursive;
     background-color: rgba(0,0,0,0.7);
     opacity: 1;
     color: silver;
@@ -178,6 +183,12 @@ li{
     width: 150px;
     text-align: center;
     border-radius: 2px;
+}
+
+.profileName{
+    font-family: 'Cinzel Decorative', cursive;
+    margin: 15px 5px;
+    color: silver;
 }
 
 .footer{
@@ -245,9 +256,8 @@ li{
 }
 
 .tileContainer:before{
-    /*content: "";*/
     display: block;
-    padding-top: 60% 	/* initial ratio of 1:1*/
+    padding-top: 60%
 }
 
 .internalTile{
@@ -258,10 +268,10 @@ li{
 }
 
 .titleHighlight{
+    font-family: 'Cinzel Decorative', cursive;
     background: linear-gradient(to bottom right, rgba(25,100,45,0.6), rgba(45,150,75,0.6));
     max-width: 100%;
     min-width: 100%;
-    /*background-color: rgba(25,100,45,0.6);*/
 }
 
 .listItem{
@@ -340,11 +350,10 @@ li{
 }
 
 .creatureBackground{
-    background: url(https://hoiabaciuforest.com/wp-content/uploads/2012/11/Truth-about-the-Hoia-Baciu-Forest-an-area-on-Earth-created-55000-years-ago-by-Atlanta.jpg);
+    /*background: url(https://hoiabaciuforest.com/wp-content/uploads/2012/11/Truth-about-the-Hoia-Baciu-Forest-an-area-on-Earth-created-55000-years-ago-by-Atlanta.jpg);*/
     backgroundSize:100%;
     min-width: 755px;
-    background-repeat: repeat-y;
-    background-position: center;
+    background: url('siteImages/DndBackground.jpg') repeat-y center;
     background-size: cover;
     border-color: #004b00;
     border-style: groove;

@@ -9,7 +9,7 @@ include_once("../lib/pageHeader.php");
     <footer class='footer widthDiv'>
         <div class='inlineContainer'></div>
         <div class='centerDiv'>
-                You are filling out a form
+                You are filling out a login form
         </div>
         <div class='inlineContainer'></div></footer>
 </html>";
