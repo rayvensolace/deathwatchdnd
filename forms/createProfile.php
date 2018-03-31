@@ -1,14 +1,52 @@
 <?php
 $thisPage = "loginForm";
 include_once("../lib/pageHeader.php");
+
+
+$nerd = null;
+if(getIfContains("NERD") != null) {
+    $nerd = unserialize(getIfContains("NERD"));
+}
+$username = $nerd== null ? getIfContains("loginUser") : $nerd->getName();
+$useremail = $nerd== null ? getIfContains("userEmail") : $nerd->getEmail();
+$getDemo = $nerd == null ? null : $nerd->getDemo();
+
+
   echo "
+    <div class = 'formBackground'>
     <form action='createProfileHandler.php' method='post'>
-    <div>User Name(aka. Nerd Alias):<input type='text' name='user' placeholder='username'></div>
-    <div>E-mail Address(where do I send the owl when you forget your secret word):<input type='text' name='email' placeholder='email'></div>
-    <div>Password(Speak friend and enter):<input type='password' name='password' placeholder='Password'></div>
-    <div>Password(Can you type that again?):<input type='password' name='password' placeholder='Password'></div>
-    <div><input type='submit' value='Submit'></div>
+    
+    
+    <div>User Name"; //User Name Form
+  echo $username != null ? "": "(aka. Nerd Alias)";
+  echo ":<input type='text' name='user' ";
+  echo $username != null ? "value= '" . $username . "'" : "placeholder='username'" ;
+  echo ">". getIfContains("errorMessages","user", ""). "</div>
+
+     
+    <div>E-mail Address";//email address form
+  echo $username != null ? "" : "(where do I send the owl when you forget your secret word)";
+  echo ":<input type='text' name='email' ";
+  echo $useremail != null ? "value= '" . $useremail . "'" : "placeholder='user email'" ;
+  echo ">". getIfContains("errorMessages","email", ""). "</div>
+    
+    
+    <div>Password";//Dual password form
+  echo $username != null ? "":"(Speak friend and enter)";
+  echo ":<input type='password' name='passwordOriginal' placeholder='Password'>". getIfContains("errorMessages","password", ""). "</div>
+    <div>Password";
+  echo $username != null ? "": "(Can you type that again?)";
+  echo ":<input type='password' name='passwordSecondary' placeholder='Password'></div>";
+
+  //Demo Material
+  echo $getDemo == null ? "": "<div>Show demo material<input type='checkbox' name='getDemo' ";
+  echo ($getDemo == null || $getDemo == 0) ? "":"checked";
+  echo $getDemo == null  ? "": "></div>";
+
+
+  echo "<div><input type='submit' value='Submit'></div>
     </form>
+    </div>
   </body>
     <footer class='footer widthDiv'>
         <div class='inlineContainer'></div>
@@ -17,3 +55,8 @@ include_once("../lib/pageHeader.php");
         </div>
         <div class='inlineContainer'></div></footer>
 </html> ";
+
+unset($_SESSION["errorMessages"]);
+unset($_SESSION["MESSAGE"]);
+unset($_SESSION["loginUser"]) ;
+unset($_SESSION["userEmail"]) ;

@@ -8,6 +8,7 @@ class Nerd
     private $email;
     private $DMLevel;
     private $secret;
+    private $demo;
 
     /**
      * Nerd constructor.
@@ -16,13 +17,15 @@ class Nerd
      * @param $email
      * @param $secret
      * @param $DMLevel
+     * @param $demo
      */
-    public function __construct($alias, $id, $email, $secret, $DMLevel ){
+    public function __construct($alias, $email, $DMLevel , $id, $demo = 1){
         $this->alias = $alias;
         $this->email = $email;
         $this->id = $id;
-        $this->secret = $secret;
+        $this->secret = crypt($alias . $email . "dungeon", "master");
         $this->DMLevel = $DMLevel;
+        $this->demo = $demo;
     }
 
     public function getName(){
@@ -33,8 +36,24 @@ class Nerd
         return $this->secret;
     }
 
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function getDemo(){
+        return $this->demo;
+    }
+
     public function validateCookie($secret){
         return $this->secret == $secret;
+    }
+
+    public function getDMLevel(){
+        return $this->DMLevel;
+    }
+
+    public function getId(){
+        return $this->id;
     }
 
     public function appropriateLevel($DMLevel){
@@ -57,5 +76,10 @@ class Nerd
                 }
         }
         return false;
+    }
+
+    public function string(){
+        $returnString =  "ID:".$this->id."<br>Name:".$this->alias."<br>Email:".$this->email."<br>Hash:".$this->secret."<br>GetDemo:".$this->demo."<br>DMLevel:".$this->DMLevel."<br>";
+        return $returnString;
     }
 }

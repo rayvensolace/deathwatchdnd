@@ -6,6 +6,7 @@ checkSession($thisPage)
 <title>Deathwatch D&D</title>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Contrail+One" rel="stylesheet">
     <link rel="stylesheet" href="/baseStyle.css">
 
 </head>

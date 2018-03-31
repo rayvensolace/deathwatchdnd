@@ -39,10 +39,11 @@ include_once ("../Objects/Nerd.php");
     if ($thisPage != "Landing"){
         if(isset($_SESSION['NERD'])){
             $nerd = unserialize($_SESSION['NERD']);
-            echo "<div class = 'rightDiv profileName'>".  $nerd->getName() . "</div>";
             if($nerd->getName() != 'Guest'){
-                   echo "<a href='../forms/logoutHandler.php'> <button id='loginButton' class='rightDiv' type='button'>Logout</button></a>";
+                    echo "<div class = 'rightDiv profileName' ><a href='../forms/createProfile.php'>".   $nerd->getName() . "</a></div>";
+                    echo "<a href='../forms/logoutHandler.php'> <button id='loginButton' class='rightDiv' type='button'>Logout</button></a>";
             }else{
+                    echo "<div class = 'rightDiv profileName' >".  $nerd->getName() . "</div>";
                     echo "<a href= '../forms/login.php'><button id='loginButton' class='rightDiv' type='button'>Login</button></a>";
             }
         }
