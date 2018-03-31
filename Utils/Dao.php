@@ -32,7 +32,7 @@ class Dao
             //Heroku info mysql://b582fc1a10d3d8:98831eb9@us-cdbr-iron-east-05.cleardb.net/heroku_1b423bac23d8d42?reconnect=true
             //$connection = new PDO("mysql:host={us-cdbr-iron-east-05.cleardb.net} ; dbname={heroku_1b423bac23d8d42}", "b582fc1a10d3d8", "98831eb9");
             //$connection = new PDO("mysql:host=127.0.0.1; dbname='deathwatchdnd'", 'root', 'Hope2015');
-            //$connection = new PDO("mysql:host={$this->host}; port=3306 ;dbname={$this->db}", $this->user, $this->pass,
+            $connection = new PDO("mysql:host={$this->host}; port=3306 ;dbname={$this->db}", $this->user, $this->pass,
                 array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
             return $connection;
         }catch(Exception $exception){
