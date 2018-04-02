@@ -1,8 +1,5 @@
 <?php
 
-
-
-
   function  createTile(){
          echo "<div class=\"tileContainer\"><div class='internalTile'>Generic Tile</div></div>";
 }
@@ -25,50 +22,61 @@
         </div>";
     }
 
-    function createCreatureTile($creatureArray){
-      $name = $name = empty($creatureArray['creatureName']) ? 'Monster Name':$creatureArray['creatureName'];
+    function createCreatureTile($enemy){
+      $name = $enemy->name;
       echo "<div class='tileContainer'>
         <div class='inlineList thinForm widthDiv titleHighlight'>
-            <div class='inlineContainer'></div><div class='centerDiv'>$name</div><div class='inlineContainer'></div>
+            <div class='inlineContainer'></div><div class='centerDiv'>".htmlspecialchars($name)."</div><div class='inlineContainer'></div>
         </div>
             <div class='inlineList widthDiv internalTile'>
                 <div class='statColumn'>
-                    <ol class='dataList'>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                    </ol>    
+                    <ol class='dataList'>";
+            echo "<li class='listSectionHeader'>Basic Stats</li>";
+            $baseStatsArray = $enemy->baseStatsArray;
+            foreach($baseStatsArray as $stat => $value){
+                echo "<li>".$stat.": ".$value."</li>";
+            }
+            echo "<li class='listSectionHeader'>Attributes</li>";
+            $attributesArray = $enemy->attributesArray;
+            foreach($attributesArray as $attribute => $value){
+                echo "<li>".$attribute.": ".$value."</li>";
+            }
+
+            echo "<li class='listSectionHeader'>Abilities</li>";
+            $abilitiesMap = $enemy->abilitiesMap;
+            foreach($abilitiesMap as $ability => $value){
+                echo "<li>".htmlspecialchars($ability).": ".htmlspecialchars($value)."</li>";
+            }
+
+            echo "<li class='listSectionHeader'>Spells</li>";
+            $spellsMap = $enemy->spellsMap;
+            foreach($spellsMap as $spell => $value){
+                echo "<li>".htmlspecialchars($spell).": ".htmlspecialchars($value)."</li>";
+            }
+
+          echo "    </dl>    
                 </div>
                 <div class='descriptionColumn'>
-                    <ol class='dataList'>
-                        <li>Skills: x</li>
-                        <li>Stuff: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                        <li>Strength: x</li>
-                    </ol>
+                    <dl class='dataList'>";
+
+
+        echo "<li class='listSectionHeader'>Skills</li>";
+        $skillsArray = $enemy->skillsArray;
+        foreach($skillsArray as $skill => $value){
+            echo "<li>".$skill.": ".$value."</li>";
+        }
+
+        echo "<li class='listSectionHeader'>Items</li>";
+        $itemsMap = $enemy->itemsMap;
+        foreach($itemsMap as $item => $value){
+            echo "<li>".htmlspecialchars($item).": ".htmlspecialchars($value)."</li>";
+        }
+
+          echo "    </ol>
                 </div>
-                <div class='notesColumn'>
-                    Ability damage alternate form animal type character level dead elemental plane gold piece metal domain negative level paralyzed party spontaneous casting suffering domain suffocation water dangers. Continuous damage extraplanar ice effects knocked down manufactured weapons melee attack ranged attack rebuke undead sorcerer subtype. Command undead domain spell effective hit point increase falling objects force damage healing subschool helpless illusion domain inflict spell inherent bonus initiative check knowledge domain lava effects masterwork material plane phantasm subschool player character prone speed thirst two-handed weapon. Aberration type animal type baatezu subtype barbarian construct type craft domain damage reduction elemental plane energy damage falling objects fast healing flight frightful presence glamer subschool hit die level medium monstrous humanoid type negate ocean domain ranged weapon saving throw skill rank small spider domain storm domain summon supernatural ability temporary hit points vermin type.
-                </div>
+                <div class='notesColumn'>";
+                echo    htmlspecialchars($enemy->notes);
+          echo  "</div>
             </div>
         </div>";
     }

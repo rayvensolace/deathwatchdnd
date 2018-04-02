@@ -19,9 +19,11 @@ if(!isset($_POST["user"]) || empty($_POST["user"])){
     $errors["user"] = "A valid user name must be used";
 }else{
     $dao = new Dao();
+    $user = $_POST["user"];
     if(!validateName($_POST["user"])){
         $errors["user"] = "User name must be valid";
-    }else if(  $pastNerd != null  || $dao->checkAvailability($user)){
+        addValueToSession("loginuser", $user);
+    }else if(  $pastNerd != null  || $dao->checkUserAvailability($user)){
         $user = $_POST["user"];
         addValueToSession("loginuser", $user);
     }else{
@@ -34,7 +36,7 @@ if(!isset($_POST["passwordOriginal"]) || empty($_POST["passwordOriginal"])){
     $errors["password"] = "A password must be entered";
 }else{
     if(!validatePassword($_POST["passwordOriginal"])){
-        $errors["password"] = "Password must be between 6 and 30 characters and contain either a capital letter or a special character";
+        $errors["password"] = "Invalid password";
     }else if(!isset($_POST["passwordSecondary"]) || $_POST["passwordSecondary"] != $_POST["passwordOriginal"]){
         $errors["password"] = "Password inputs must match";
     }else{

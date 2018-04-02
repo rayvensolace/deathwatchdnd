@@ -1,85 +1,144 @@
 <?php
 $thisPage = "loginForm";
 include_once("../lib/pageHeader.php");
-
+echo print_r($_SESSION,1);
 echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</h1>
         <form action='createCreatureHandler.php' method='post'>
         <dl>
-        <dd><div>Name of Creature:<input type='text' name='name'><span class ='formNotes'>*Required: Once set cannot be changed</span></div></dd>
-                
+        <dd><div>Name of Creature:<input type='text' name='name'><span class ='formNotes'>*Required</span></div>
+        <div>". getIfContains('errorMessages', 'name', '') ."</div></dd>
+        <div  ><input type='hidden' name='id' value='". getIfContains('prevValues', 'id', 0) ."'></div>        
         <dt>Attributes:</dt>
-        <dd>AC:<input type='number' name='ArmorClass' value='". getIfContains('prevValues', 'armorClass', 10) ."'></dd>
-        <dd>Attack:<input type='number' name='Attack' value='". getIfContains('prevValues', 'attack', 0) ."'></dd>
-        <dd>Initiative:<input type='number' name='Initiative' value='". getIfContains('prevValues', 'armorClass', 0) ."'></dd>
-        
+        <dd>AC:<input type='number' name='armorClass' value='". getIfContains('prevValues', 'armorClass', 10) ."'></dd>
+        <dd>Attack:<input type='number' name='attack' value='". getIfContains('prevValues', 'attack', 0) ."'></dd>
+        <dd>Initiative:<input type='number' name='initiative' value='". getIfContains('prevValues', 'initiative', 0) ."'></dd>
+        <dd>Challenge Rating:<input type='number' name='challengeRating' value='". getIfContains('prevValues', 'challengeRating', 0) ."'></dd>
+        <dd>Size:
+            <select name='size'>
+                <option value='diminutive' ";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'diminutive' ? 'selected' : '';
+                    echo ">Diminutive</option>
+                <option value='tiny' ";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'tiny' ? 'selected' : '';
+                    echo ">Tiny</option>
+                <option value='small' ";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'small' ? 'selected' : '';
+                    echo ">Small</option>
+                <option value='medium'";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'medium' ? 'selected' : '';
+                    echo ">Medium</option>
+                <option value='large'";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'large' ? 'selected' : '';
+                    echo ">Large</option>
+                <option value='huge'";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'huge' ? 'selected' : '';
+                    echo ">Huge</option>
+                <option value='gargantuan' ";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'gargantuan' ? 'selected' : '';
+                    echo ">Gargantuan</option>
+                <option value='Colossal' ";
+                    echo getIfContains('prevValues', 'size', 'medium') == 'colossal' ? 'selected' : '';
+                    echo ">Colossal</option>
+            </select>
+         <dd>Enemy Type:
+            <select name='enemyType'>
+                <option value='classedCharacters' ";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'classedCharacters' ? 'selected' : '';
+                    echo ">Characters/NPCs</option>
+                <option value='humanoids' ";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'humanoids' ? 'selected' : '';
+                    echo ">Humanoids</option>
+                <option value='animals' ";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'animals' ? 'selected' : '';
+                    echo ">Animals</option>
+                <option value='magicalCreatures'";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'magicalCreatures' ? 'selected' : '';
+                    echo ">Magical Creatures</option>
+                <option value='abberations'";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'abberations' ? 'selected' : '';
+                    echo ">Abberations</option>
+                <option value='custom'";
+                    echo getIfContains('prevValues', 'enemyType', 'classedCharacters') == 'custom' ? 'selected' : '';
+                    echo ">custom</option>
+            </select>
+         </dd> 
+            
         <dt>Stats:</dt>
-        <dd><div>Strength:<input type='number' name='Strength' value='". getIfContains('prevValues', 'Strength', 10) ."'></div></dd>
-        <dd><div>Agility:<input type='number' name='Agility' value='". getIfContains('prevValues', 'Agility', 10) ."'></div></dd>
-        <dd><div>Constitution:<input type='number' name='Constitution' value='". getIfContains('prevValues', 'Constitution', 10) ."'></div></dd>
-        <dd><div>Intelligence:<input type='number' name='Intelligence' value='". getIfContains('prevValues', 'Intelligence', 10) ."'></div></dd>
-        <dd><div>Wisdom:<input type='number' name='Wisdom' value='". getIfContains('prevValues', 'Wisdom', 10) ."'></div></dd>
-        <dd><div>Charisma:<input type='number' name='Charisma' value='". getIfContains('prevValues', 'Charisma', 10) ."'></div></dd>
+        <dd><div>Strength:<input type='number' name='strength' value='". getIfContains('prevValues', 'strength', 10) ."'></div></dd>
+        <dd><div>Agility:<input type='number' name='dexterity' value='". getIfContains('prevValues', 'dexterity', 10) ."'></div></dd>
+        <dd><div>Constitution:<input type='number' name='constitution' value='". getIfContains('prevValues', 'constitution', 10) ."'></div></dd>
+        <dd><div>Intelligence:<input type='number' name='intelligence' value='". getIfContains('prevValues', 'intelligence', 10) ."'></div></dd>
+        <dd><div>Wisdom:<input type='number' name='wisdom' value='". getIfContains('prevValues', 'wisdom', 10) ."'></div></dd>
+        <dd><div>Charisma:<input type='number' name='charisma' value='". getIfContains('prevValues', 'charisma', 10) ."'></div></dd>
         
         <dt>Saves:</dt>
-        <dd><div>Will:<input type='number' name='Will' value='". getIfContains('prevValues', 'Will', 10) ."'></div></dd>
-        <dd><div>Fortitude:<input type='number' name='Fortitude' value='". getIfContains('prevValues', 'Fortitude', 10) ."'></div></dd>
-        <dd><div>Reflex:<input type='number' name='Reflex' value='". getIfContains('prevValues', 'Reflex', 10) ."'></div></dd>
+        <dd><div>Will:<input type='number' name='will' value='". getIfContains('prevValues', 'will', 10) ."'></div></dd>
+        <dd><div>Fortitude:<input type='number' name='fortitude' value='". getIfContains('prevValues', 'fortitude', 10) ."'></div></dd>
+        <dd><div>Reflex:<input type='number' name='reflex' value='". getIfContains('prevValues', 'reflex', 10) ."'></div></dd>
         
         
         <dt>Skills:</dt>
-        <dd><div>Appraise:<input type='number' name='Appraise' value='". getIfContains('prevValues', 'Appraise', 0) ."'></div></dd>
-        <dd><div>Balance:<input type='number' name='Balance' value='". getIfContains('prevValues', 'Balance', 0) ."'></div></dd>
-        <dd><div>Bluff:<input type='number' name='Bluff' value='". getIfContains('prevValues', 'Bluff', 0) ."'></div></dd>
-        <dd><div>Climb:<input type='number' name='Climb' value='". getIfContains('prevValues', 'Climb', 0) ."'></div></dd>
-        <dd><div>Concentration:<input type='number' name='Concentration' value='". getIfContains('prevValues', 'Concentration', 0) ."'></div></dd>
-        <dd><div>Craft:<input type='number' name='Craft' value='". getIfContains('prevValues', 'Craft', 0) ."'></div></dd>
-        <dd><div>Decipher Script:<input type='number' name='Decipher Script' value='". getIfContains('prevValues', 'Decipher Script', 0) ."'></div></dd>
-        <dd><div>Diplomacy:<input type='number' name='Diplomacy' value='". getIfContains('prevValues', 'Diplomacy', 0) ."'></div></dd>
-        <dd><div>Disable Device:<input type='number' name='Disable Device' value='". getIfContains('prevValues', 'Disable Device', 0) ."'></div></dd>
-        <dd><div>Disguise:<input type='number' name='Disguise' value='". getIfContains('prevValues', 'Disguise', 0) ."'></div></dd>
-        <dd><div>Escape Artist:<input type='number' name='Escape Artist' value='". getIfContains('prevValues', 'Escape Artist', 0) ."'></div></dd>
-        <dd><div>Forgery:<input type='number' name='Forgery' value='". getIfContains('prevValues', 'Forgery', 0) ."'></div></dd>
-        <dd><div>Gather Information:<input type='number' name='Gather Information' value='". getIfContains('prevValues', 'Gather Information', 0) ."'></div></dd>
-        <dd><div>Handle Animal:<input type='number' name='Handle Animal' value='". getIfContains('prevValues', 'Handle Animal', 0) ."'></div></dd>
-        <dd><div>Heal:<input type='number' name='Heal' value='". getIfContains('prevValues', 'Heal', 0) ."'></div></dd>
-        <dd><div>Hide:<input type='number' name='Hide' value='". getIfContains('prevValues', 'Hide', 0) ."'></div></dd>
-        <dd><div>Intimidate:<input type='number' name='Intimidate' value='". getIfContains('prevValues', 'Intimidate', 0) ."'></div></dd>
-        <dd><div>Jump:<input type='number' name='Jump' value='". getIfContains('prevValues', 'Jump', 0) ."'></div></dd>
-        <dd><div>Knowledge:<input type='number' name='Knowledge' value='". getIfContains('prevValues', 'Knowledge', 0) ."'></div></dd>
-        <dd><div>Listen:<input type='number' name='Listen' value='". getIfContains('prevValues', 'Listen', 0) ."'></div></dd>
-        <dd><div>Move Silently:<input type='number' name='Move Silently' value='". getIfContains('prevValues', 'Move Silently', 0) ."'></div></dd>
-        <dd><div>Open Lock:<input type='number' name='Open Lock' value='". getIfContains('prevValues', 'Open Lock', 0) ."'></div></dd>
-        <dd><div>Perform:<input type='number' name='Perform' value='". getIfContains('prevValues', 'Perform', 0) ."'></div></dd>
-        <dd><div>Profession:<input type='number' name='Profession' value='". getIfContains('prevValues', 'Profession', 0) ."'></div></dd>
-        <dd><div>Ride:<input type='number' name='Ride' value='". getIfContains('prevValues', 'Ride', 0) ."'></div></dd>
-        <dd><div>Search:<input type='number' name='Search' value='". getIfContains('prevValues', 'Search', 0) ."'></div></dd>
-        <dd><div>Sense Motive:<input type='number' name='Sense Motive' value='". getIfContains('prevValues', 'Sense Motive', 0) ."'></div></dd>
-        <dd><div>Sleight of Hand:<input type='number' name='Sleight of Hand' value='". getIfContains('prevValues', 'Sleight of Hand', 0) ."'></div></dd>
-        <dd><div>Spellcraft:<input type='number' name='Spellcraft' value='". getIfContains('prevValues', 'Spellcraft', 0) ."'></div></dd>
-        <dd><div>Spot:<input type='number' name='Spot' value='". getIfContains('prevValues', 'Spot', 0) ."'></div></dd>
-        <dd><div>Survival:<input type='number' name='Survival' value='". getIfContains('prevValues', 'Survival', 0) ."'></div></dd>
-        <dd><div>Swim:<input type='number' name='Swim' value='". getIfContains('prevValues', 'Swim', 0) ."'></div></dd>
-        <dd><div>Tumble:<input type='number' name='Tumble' value='". getIfContains('prevValues', 'Tumble', 0) ."'></div></dd>
-        <dd><div>Use Magic Device:<input type='number' name='Use Magic Device' value='". getIfContains('prevValues', 'Use Magic Device', 0) ."'></div></dd>
-        <dd><div>Use Rope:<input type='number' name='Use Rope' value='". getIfContains('prevValues', 'Use Rope', 0) ."'></div></dd>
+        <dd><div>Appraise:<input type='number' name='appraise' value='". getIfContains('prevValues', 'appraise', 0) ."'></div></dd>
+        <dd><div>Balance:<input type='number' name='balance' value='". getIfContains('prevValues', 'balance', 0) ."'></div></dd>
+        <dd><div>Bluff:<input type='number' name='bluff' value='". getIfContains('prevValues', 'bluff', 0) ."'></div></dd>
+        <dd><div>Climb:<input type='number' name='climb' value='". getIfContains('prevValues', 'climb', 0) ."'></div></dd>
+        <dd><div>Concentration:<input type='number' name='concentration' value='". getIfContains('prevValues', 'concentration', 0) ."'></div></dd>
+        <dd><div>Craft:<input type='number' name='craft' value='". getIfContains('prevValues', 'craft', 0) ."'></div></dd>
+        <dd><div>Decipher Script:<input type='number' name='decipherScript' value='". getIfContains('prevValues', 'decipher Script', 0) ."'></div></dd>
+        <dd><div>Diplomacy:<input type='number' name='diplomacy' value='". getIfContains('prevValues', 'diplomacy', 0) ."'></div></dd>
+        <dd><div>Disable Device:<input type='number' name='disableDevice' value='". getIfContains('prevValues', 'disableDevice', 0) ."'></div></dd>
+        <dd><div>Disguise:<input type='number' name='disguise' value='". getIfContains('prevValues', 'disguise', 0) ."'></div></dd>
+        <dd><div>Escape Artist:<input type='number' name='escapeArtist' value='". getIfContains('prevValues', 'escapeArtist', 0) ."'></div></dd>
+        <dd><div>Forgery:<input type='number' name='forgery' value='". getIfContains('prevValues', 'forgery', 0) ."'></div></dd>
+        <dd><div>Gather Information:<input type='number' name='gatherInformation' value='". getIfContains('prevValues', 'gatherInformation', 0) ."'></div></dd>
+        <dd><div>Handle Animal:<input type='number' name='handleAnimal' value='". getIfContains('prevValues', 'handleAnimal', 0) ."'></div></dd>
+        <dd><div>Heal:<input type='number' name='heal' value='". getIfContains('prevValues', 'heal', 0) ."'></div></dd>
+        <dd><div>Hide:<input type='number' name='hide' value='". getIfContains('prevValues', 'hide', 0) ."'></div></dd>
+        <dd><div>Intimidate:<input type='number' name='intimidate' value='". getIfContains('prevValues', 'intimidate', 0) ."'></div></dd>
+        <dd><div>Jump:<input type='number' name='jump' value='". getIfContains('prevValues', 'jump', 0) ."'></div></dd>
+        <dd><div>Knowledge:<input type='number' name='knowledge' value='". getIfContains('prevValues', 'knowledge', 0) ."'></div></dd>
+        <dd><div>Listen:<input type='number' name='listen' value='". getIfContains('prevValues', 'listen', 0) ."'></div></dd>
+        <dd><div>Move Silently:<input type='number' name='moveSilently' value='". getIfContains('prevValues', 'moveSilently', 0) ."'></div></dd>
+        <dd><div>Open Lock:<input type='number' name='openLock' value='". getIfContains('prevValues', 'openLock', 0) ."'></div></dd>
+        <dd><div>Perform:<input type='number' name='perform' value='". getIfContains('prevValues', 'perform', 0) ."'></div></dd>
+        <dd><div>Profession:<input type='number' name='profession' value='". getIfContains('prevValues', 'profession', 0) ."'></div></dd>
+        <dd><div>Ride:<input type='number' name='ride' value='". getIfContains('prevValues', 'ride', 0) ."'></div></dd>
+        <dd><div>Search:<input type='number' name='search' value='". getIfContains('prevValues', 'search', 0) ."'></div></dd>
+        <dd><div>Sense Motive:<input type='number' name='senseMotive' value='". getIfContains('prevValues', 'senseMotive', 0) ."'></div></dd>
+        <dd><div>Sleight of Hand:<input type='number' name='sleightOfHand' value='". getIfContains('prevValues', 'sleightOfHand', 0) ."'></div></dd>
+        <dd><div>Spellcraft:<input type='number' name='spellcraft' value='". getIfContains('prevValues', 'spellcraft', 0) ."'></div></dd>
+        <dd><div>Spot:<input type='number' name='spot' value='". getIfContains('prevValues', 'spot', 0) ."'></div></dd>
+        <dd><div>Survival:<input type='number' name='survival' value='". getIfContains('prevValues', 'survival', 0) ."'></div></dd>
+        <dd><div>Swim:<input type='number' name='swim' value='". getIfContains('prevValues', 'swim', 0) ."'></div></dd>
+        <dd><div>Tumble:<input type='number' name='tumble' value='". getIfContains('prevValues', 'tumble', 0) ."'></div></dd>
+        <dd><div>Use Magic Device:<input type='number' name='useMagicDevice' value='". getIfContains('prevValues', 'useMagicDevice', 0) ."'></div></dd>
+        <dd><div>Use Rope:<input type='number' name='useRope' value='". getIfContains('prevValues', 'useRope', 0) ."'></div></dd>
         <div></div>
         
         <dt>Weapons:</dt>
-        <dd><div>Weapon Name:<input type='text' name='item1' value='". getIfContains('prevValues', 'item1', 'dagger') ."'></div>
-        <div>Damage/Note:<input type='text' name='value1' value='". getIfContains('prevValues', 'value1', '1d4') ."'></div></dd>
+        <dd><div>Weapon Name:<input type='text' name='weapon1' value='". getIfContains('prevValues', 'weapon1', 'dagger') ."'></div>
+        <div>Damage/Note:<input type='text' name='damage1' value='". getIfContains('prevValues', 'damage1', '1d4') ."'></div></dd>
         
         <dt>Items:</dt>
-        <dd><div>Item Name:<input type='text' name='item1' value='". getIfContains('prevValues', 'Use Rope', 'Gold Pieces') ."'></div>
-        <div>Value/Note:<input type='text' name='value1' value='". getIfContains('prevValues', 'Use Rope', '100') ."'></div></dd>
+        <dd><div>Item Name:<input type='text' name='item1' value='". getIfContains('prevValues', 'item1', 'Gold Pieces') ."'></div>
+        <div>Value/Note:<input type='text' name='value1' value='". getIfContains('prevValues', 'value1', '100') ."'></div></dd>
+        
+        <dt>Abilities:</dt>
+        <dd><div>Ability Name:<input type='text' name='ability1' value='". getIfContains('prevValues', 'ability1', '') ."'></div>
+        <div>Note:<input type='text' name='abilityNote1' value='". getIfContains('prevValues', 'abilityNote1', '') ."'></div></dd>
+        
+        <dt>Spells:</dt>
+        <dd><div>Spell Name:<input type='text' name='spell1' value='". getIfContains('prevValues', 'spell1', '') ."'></div>
+        <div>Prepared/Note:<input type='text' name='spellNote1' value='". getIfContains('prevValues', 'spellNote1', '') ."'></div></dd>
         
         
         <dt>Notes:<span class='formNotes'>*1000 Character max</span></dt>
-        <dd><textarea name='textarea' rows='10' cols='30' form='creatureForm'></textarea></dd>
+        <dd><textarea name='textarea' rows='10' cols='30' form='creatureForm'>". getIfContains('prevValues', 'notes', '') ."</textarea></dd>
         
-        
-        <dt>Image:</dt>
-        <dd><input type='file' name='picture'></dd>
-        
+        ";
+        //<dt>Image:</dt>
+        //<dd><input type='file' name='picture'></dd>
+        echo "
         <div><input type='submit' value='Submit'></div>
      </dl>
      </form>
@@ -92,4 +151,6 @@ echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</
         </div>
         <div class='inlineContainer'></div></footer>
 </html>";
+unset($_SESSION['errorMessages']);
+unset($_SESSION['prevValues']);
 ?>

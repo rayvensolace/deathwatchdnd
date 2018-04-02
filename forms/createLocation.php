@@ -3,7 +3,9 @@ include_once("../Utils/SessionManagementUtils.php");
 $thisPage = "campaignForm";
 include_once("../lib/pageHeader.php");
 include_once("../lib/list.php");
-echo   "<div class = 'formBackground'><form class='thinForm' action='createLocationHandler.php' method='post'>
+echo   "<div class = 'formBackground'>
+        <h1 class='formHeader'>Create a Location</h1>
+        <form class='thinForm' action='createLocationHandler.php' method='post'>
         <div>Name of Location: <input type='text' name='locationName'><span class = 'formNotes'>*Required: once set cannot be changed</span></div>
         <div>What Campaign Sections will this be a part of?</div><div>";
             $list = array();

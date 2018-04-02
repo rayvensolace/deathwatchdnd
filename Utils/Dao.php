@@ -1,19 +1,21 @@
 <?php
 include_once("../Objects/Nerd.php");
+include_once("../Objects/Enemy.php");
+include_once("../Utils/EnemyBuilder.php");
 
 class Dao
 {
 
 
-//    private $host = "localhost";
-//    private $db = "deathwatchdnd";
-//    private $user = "root";
-//    private $pass = "Hope2015";
+    private $host = "localhost";
+    private $db = "deathwatchdnd";
+    private $user = "root";
+    private $pass = "Hope2015";
 
-    private $host = "us-cdbr-iron-east-05.cleardb.net";
-    private $db = "heroku_1b423bac23d8d42";
-    private $user = "b582fc1a10d3d8";
-    private $pass = "98831eb9";
+//    private $host = "us-cdbr-iron-east-05.cleardb.net";
+//    private $db = "heroku_1b423bac23d8d42";
+//    private $user = "b582fc1a10d3d8";
+//    private $pass = "98831eb9";
 
     protected $logger;
 
@@ -46,7 +48,7 @@ class Dao
      * @param $username
      * @return bool
      */
-    function checkAvailability($username)
+    function checkUserAvailability($username)
     {
         $connection = $this->getConnection();
         //echo $username;
@@ -176,10 +178,126 @@ class Dao
     }
 
     /**
-     *
+     * @param $enemyname
+     * @return bool
      */
-    function addEnemy(){
+    function checkEnemyAvailability($enemyname)
+    {
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        //echo $username;
+        $query = $connection->prepare("Select enemyId FROM enemies WHERE enemyName = :enemyName and creatorsId = :creatorsId");
+        $query->bindParam(':enemyName', $enemyname);
+        $query->bindParam(':creatorsId', $nerdID);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        if (empty($results)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
+    /**
+     * @param $enemy
+     */
+    function addEnemy($enemy){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        //echo $username;
+        $query = $connection->prepare("Insert INTO enemies 
+                                (creatorsId, enemyName, challengeRating, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage) 
+                                VALUES (:creatorsId, :enemyName, :challengeRating, :attack,:armorClass,:size,:enemyType,:initiative,:strength,:dexterity,:constitution,:intelligence,:wisdom,:charisma,:fortitude,:reflex,:will,:skillsArray,:weaponsMap,:itemsMap,:spellsMap,:abilitiesMap,:notes,:enemyImage)");
+        $query->bindParam(':creatorsId', $nerdID);
+        $query->bindParam(':enemyName', $enemy->name);
+        $baseStatsArray = $enemy->baseStatsArray;// :challengeRating, :attack,:armorClass,:size,:enemyType,:initiative
+        $query->bindParam(':challengeRating', $baseStatsArray['challengeRating']);
+        $query->bindParam(':attack', $baseStatsArray['attack']);
+        $query->bindParam(':armorClass', $baseStatsArray['armorClass']);
+        $query->bindParam(':enemyType', $baseStatsArray['enemyType']);
+        $query->bindParam(':size', $baseStatsArray['size']);
+        $query->bindParam(':initiative', $baseStatsArray['initiative']);
+        $attributesArray = $enemy->attributesArray;//:strength,:dexterity,:constitution,:intelligence,:wisdom,:charisma
+        $query->bindParam(':strength', $attributesArray['strength']);
+        $query->bindParam(':dexterity', $attributesArray['dexterity']);
+        $query->bindParam(':constitution', $attributesArray['constitution']);
+        $query->bindParam(':intelligence', $attributesArray['intelligence']);
+        $query->bindParam(':wisdom', $attributesArray['wisdom']);
+        $query->bindParam(':charisma', $attributesArray['charisma']);
+        $savesArray = $enemy->savesArray;//:fortitude,:reflex,:will
+        $query->bindParam(':fortitude', $savesArray['fortitude']);
+        $query->bindParam(':reflex', $savesArray['reflex']);
+        $query->bindParam(':will', $savesArray['will']);
+        //:skillsArray,:weaponsMap,:itemsMap,:spellsMap,:abilitiesMap,:notes,:enemyImage
+        $skillsArray = serialize($enemy->skillsArray);
+        $query->bindParam(':skillsArray',$skillsArray);
+
+        if(isset($enemy->weaponsMap)) {
+            $weaponsMap = serialize($enemy->weaponsMap);
+        }else{
+            $weaponsMap = null;
+        }
+        $query->bindParam(':weaponsMap', $weaponsMap);
+
+        $itemsMap = serialize($enemy->itemsMap);
+        $query->bindParam(':itemsMap',$itemsMap);
+
+        $abilitiesMap =  serialize($enemy->abilitiesMap);
+        $query->bindParam(':abilitiesMap',$abilitiesMap);
+
+        $spellsMap = serialize($enemy->spellsMap);
+        $query->bindParam(':spellsMap',$spellsMap);
+
+        if(isset($enemy->notes)) {
+            $notes = $enemy->notes;
+        }else{
+            $notes = null;
+        }
+        $query->bindParam(':notes',$notes);
+
+        $image = $enemy->image;
+        $query->bindParam(':enemyImage',$image);
+
+        $results = null;
+        try {
+            $query->execute();
+
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        echo "<br><br> ADDED ENEMY<br>";
+    }
+
+    /**
+     * @param $enemy
+     */
+    function updateEnemy($enemy){
+        echo "<br><br> UPDATED ENEMY<br>";
+    }
+
+    function getEnemies(){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        $query = $connection->prepare("Select 
+                                enemyId,creatorsId, enemyName, challengeRating, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage 
+                                FROM enemies where creatorsId = :creatorsId");
+        $query->bindParam(':creatorsId',$nerdID);
+        $query->execute();
+        $results = $query->fetchAll();
+        $enemies = array();
+        foreach($results as $rs){
+            $enemy = createEnemyFromDatabaseRow($rs);
+            array_push($enemies,$enemy);
+        }
+        return $enemies;
     }
 
     /**

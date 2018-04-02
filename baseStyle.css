@@ -3,12 +3,13 @@ footer{
 }
 
 li{
-    padding: 2%
+    padding: 2px;
 }
 
 body {
     font-family: helvitica;
 }
+
 
 .centerDiv{
     margin: 0;
@@ -51,7 +52,7 @@ body {
 }
 
 .statColumn{
-    width: 19%;
+    width: 24%;
     text-align: left;
     float: left;
     padding: 3px;
@@ -66,16 +67,21 @@ body {
 }
 
 .descriptionColumn{
-    width:24%;
+    width:28%;
     text-align:left;
     float: left;
 }
 
 .notesColumn{
-    width: 54%;
+    width: 46%;
     text-align: left;
     float: left;
     overflow-y: auto;
+}
+
+.listSectionHeader{
+    font-weight: bolder;
+    margin: 8px 0px 2px 0px;
 }
 
 .inlineContainer{
@@ -212,7 +218,7 @@ body {
 
 .formBackground{
     background: repeating-linear-gradient(3deg,#a3dfc9 5%, #70df9a 20%,#a3dfc9 45%);
-    height:100%;
+    min-height:100%;
     padding: 5px 5px;
 }
 
@@ -243,7 +249,7 @@ body {
     width: 49%;
     height: 95%;
     margin: .5%;
-
+    overflow-y:auto;
 }
 
 .videoImage{
@@ -394,4 +400,5 @@ body {
     background-size: cover;
     border-color: #004b00;
     border-style: groove;
+
 }

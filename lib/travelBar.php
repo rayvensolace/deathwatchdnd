@@ -40,7 +40,7 @@ include_once ("../Objects/Nerd.php");
         if(isset($_SESSION['NERD'])){
             $nerd = unserialize($_SESSION['NERD']);
             if($nerd->getName() != 'Guest'){
-                    echo "<div class = 'rightDiv profileName' ><a href='../forms/createProfile.php'>".   $nerd->getName() . "</a></div>";
+                    echo "<div class = 'rightDiv profileName' ><a href='../forms/createProfile.php'>".   htmlspecialchars($nerd->getName()) . "</a></div>";
                     echo "<a href='../forms/logoutHandler.php'> <button id='loginButton' class='rightDiv' type='button'>Logout</button></a>";
             }else{
                     echo "<div class = 'rightDiv profileName' >".  $nerd->getName() . "</div>";

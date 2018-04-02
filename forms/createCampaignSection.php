@@ -2,7 +2,7 @@
 $thisPage = "campaignForm";
 include_once("../lib/pageHeader.php");
 include_once("../lib/list.php");
-echo   "<div class = 'formBackground'>
+echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Campaign Section</h1>
 
         <form class='thinForm' action='createCampaignSectionHandler.php' method='post'>
         <div>Name of Section: <input type='text' name='locationName'><span class = 'formNotes'>*Required: Once set cannot be changed</span></div>

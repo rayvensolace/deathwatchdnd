@@ -7,16 +7,19 @@ $nerd = null;
 if(getIfContains("NERD") != null) {
     $nerd = unserialize(getIfContains("NERD"));
 }
-$username = $nerd== null ? getIfContains("loginUser") : $nerd->getName();
+if($nerd != null && $nerd->getName() == 'Guest'){
+    $nerd = null;
+}
+$username = $nerd== null ? getIfContains("loginuser") : $nerd->getName();
 $useremail = $nerd== null ? getIfContains("userEmail") : $nerd->getEmail();
 $getDemo = $nerd == null ? null : $nerd->getDemo();
 
 
   echo "
-    <div class = 'formBackground'>
+    <div class = 'formBackground'><h1 class='formHeader'>Profile</h1>
     <form action='createProfileHandler.php' method='post'>
     
-    
+    <div>Name can contain Upper and Lower case letters spaces and dashes</div>
     <div>User Name"; //User Name Form
   echo $username != null ? "": "(aka. Nerd Alias)";
   echo ":<input type='text' name='user' ";
@@ -30,7 +33,7 @@ $getDemo = $nerd == null ? null : $nerd->getDemo();
   echo $useremail != null ? "value= '" . $useremail . "'" : "placeholder='user email'" ;
   echo ">". getIfContains("errorMessages","email", ""). "</div>
     
-    
+    <div>Password must contain Upper and Lower case letters and at lest one number</div>
     <div>Password";//Dual password form
   echo $username != null ? "":"(Speak friend and enter)";
   echo ":<input type='password' name='passwordOriginal' placeholder='Password'>". getIfContains("errorMessages","password", ""). "</div>

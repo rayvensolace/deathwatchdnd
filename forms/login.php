@@ -27,7 +27,10 @@ include_once("../lib/pageHeader.php");
         </div>
 
         <div><input type='submit' value='Submit'></div>
+
      </form>
+    <a href='../forms/createProfile.php'><button class='loginButton' type='button'>Create Profile</button></a>
+
 </div>
 </body>
     <footer class='footer widthDiv'>
