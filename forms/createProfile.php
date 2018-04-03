@@ -19,7 +19,7 @@ $getDemo = $nerd == null ? null : $nerd->getDemo();
     <div class = 'formBackground'><h1 class='formHeader'>Profile</h1>
     <form action='createProfileHandler.php' method='post'>
     
-    <div>Name can contain Upper and Lower case letters spaces and dashes</div>
+    <div>Name can contain Upper and Lower case letters spaces and dashes, must be longer than 4 characters</div>
     <div>User Name"; //User Name Form
   echo $username != null ? "": "(aka. Nerd Alias)";
   echo ":<input type='text' name='user' ";

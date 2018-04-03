@@ -7,7 +7,7 @@ include_once("../Utils/Dao.php");
  */
 function validateName($name)
 {
-    if (preg_match('/^[a-zA-Z \-]+$/i', $name) && strlen($name) > 5) {
+    if (preg_match('/^[a-zA-Z \-]+$/i', $name) && strlen($name) > 4) {
         return true;
     }else {
         return false;
