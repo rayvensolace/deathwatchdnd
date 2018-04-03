@@ -10,7 +10,7 @@ class Dao
 //    private $host = "localhost";
 //    private $db = "deathwatchdnd";
 //    private $user = "root";
-//    private $pass = "Hope2015";
+
 
     private $host = "us-cdbr-iron-east-05.cleardb.net";
     private $db = "heroku_1b423bac23d8d42";
@@ -31,9 +31,6 @@ class Dao
      */
     function getConnection(){
         try{
-            //Heroku info mysql://b582fc1a10d3d8:98831eb9@us-cdbr-iron-east-05.cleardb.net/heroku_1b423bac23d8d42?reconnect=true
-            //$connection = new PDO("mysql:host={us-cdbr-iron-east-05.cleardb.net} ; dbname={heroku_1b423bac23d8d42}", "b582fc1a10d3d8", "98831eb9");
-            //$connection = new PDO("mysql:host=127.0.0.1; dbname='deathwatchdnd'", 'root', 'Hope2015');
             $connection = new PDO("mysql:host={$this->host}; port=3306 ;dbname={$this->db}", $this->user, $this->pass,
                 array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
             return $connection;
@@ -279,6 +276,97 @@ class Dao
      * @param $enemy
      */
     function updateEnemy($enemy){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+
+        $enemyId = $enemy->id;
+
+        //echo $username;
+        $query = $connection->prepare("Update enemies SET 
+                                creatorsId = :creatorsId, 
+                                enemyName = :enemyName, 
+                                challengeRating = :challengeRating, 
+                                attack = :attack,
+                                armorClass = :armorClass,
+                                size = :size,
+                                enemyType = :enemyType,
+                                initiative = :initiative,
+                                strength = :strength,
+                                dexterity = :dexterity,
+                                constitution = :constitution ,
+                                intelligence = :intelligence,
+                                wisdom = :wisdom,
+                                charisma = :charisma,
+                                fortitude = :fortitude,
+                                reflex = :reflex,
+                                will = :will,
+                                skillsArray = :skillsArray,
+                                weaponsMap = :weaponsMap,
+                                itemsMap = :itemsMap,
+                                spellsMap = :spellsMap,
+                                abilitiesMap = :abilitiesMap,
+                                notes = :notes,
+                                enemyImage = :enemyImage
+                                WHERE enemyId = :enemyId");
+        $query->bindParam(':enemyId', $enemyId);
+        $query->bindParam(':creatorsId', $nerdID);
+        $query->bindParam(':enemyName', $enemy->name);
+        $baseStatsArray = $enemy->baseStatsArray;// :challengeRating, :attack,:armorClass,:size,:enemyType,:initiative
+        $query->bindParam(':challengeRating', $baseStatsArray['challengeRating']);
+        $query->bindParam(':attack', $baseStatsArray['attack']);
+        $query->bindParam(':armorClass', $baseStatsArray['armorClass']);
+        $query->bindParam(':enemyType', $baseStatsArray['enemyType']);
+        $query->bindParam(':size', $baseStatsArray['size']);
+        $query->bindParam(':initiative', $baseStatsArray['initiative']);
+        $attributesArray = $enemy->attributesArray;//:strength,:dexterity,:constitution,:intelligence,:wisdom,:charisma
+        $query->bindParam(':strength', $attributesArray['strength']);
+        $query->bindParam(':dexterity', $attributesArray['dexterity']);
+        $query->bindParam(':constitution', $attributesArray['constitution']);
+        $query->bindParam(':intelligence', $attributesArray['intelligence']);
+        $query->bindParam(':wisdom', $attributesArray['wisdom']);
+        $query->bindParam(':charisma', $attributesArray['charisma']);
+        $savesArray = $enemy->savesArray;//:fortitude,:reflex,:will
+        $query->bindParam(':fortitude', $savesArray['fortitude']);
+        $query->bindParam(':reflex', $savesArray['reflex']);
+        $query->bindParam(':will', $savesArray['will']);
+        //:skillsArray,:weaponsMap,:itemsMap,:spellsMap,:abilitiesMap,:notes,:enemyImage
+        $skillsArray = serialize($enemy->skillsArray);
+        $query->bindParam(':skillsArray',$skillsArray);
+
+        if(isset($enemy->weaponsMap)) {
+            $weaponsMap = serialize($enemy->weaponsMap);
+        }else{
+            $weaponsMap = null;
+        }
+        $query->bindParam(':weaponsMap', $weaponsMap);
+
+        $itemsMap = serialize($enemy->itemsMap);
+        $query->bindParam(':itemsMap',$itemsMap);
+
+        $abilitiesMap =  serialize($enemy->abilitiesMap);
+        $query->bindParam(':abilitiesMap',$abilitiesMap);
+
+        $spellsMap = serialize($enemy->spellsMap);
+        $query->bindParam(':spellsMap',$spellsMap);
+
+        if(isset($enemy->notes)) {
+            $notes = $enemy->notes;
+        }else{
+            $notes = null;
+        }
+        $query->bindParam(':notes',$notes);
+
+        $image = $enemy->image;
+        $query->bindParam(':enemyImage',$image);
+
+        $results = null;
+        try {
+            $query->execute();
+
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
         echo "<br><br> UPDATED ENEMY<br>";
     }
 
@@ -300,6 +388,29 @@ class Dao
         return $enemies;
     }
 
+    function getSpecificEnemies($enemyIdArray){
+        $enemyListString = '0';
+        foreach($enemyIdArray as $enemyId){
+            $enemyListString = $enemyListString.",".$enemyId;
+        }
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        $query = $connection->prepare("Select 
+                                enemyId,creatorsId, enemyName, challengeRating, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage 
+                                FROM enemies WHERE creatorsId = :creatorsId AND enemyId IN (:enemyListString)");
+        $query->bindParam(':creatorsId',$nerdID);
+        $query->bindParam(":enemyListString", $enemyListString);
+        $query->execute();
+        $results = $query->fetchAll();
+        $enemies = array();
+        foreach($results as $rs){
+            $enemy = createEnemyFromDatabaseRow($rs);
+            array_push($enemies,$enemy);
+        }
+        return $enemies;
+    }
+
     /**
      *
      */
@@ -307,10 +418,135 @@ class Dao
 
     }
 
+    function checkLocationAvailability($locationName){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        //echo $username;
+        $query = $connection->prepare("Select locationId FROM locations WHERE locationName = :locationName and creatorsId = :creatorsId");
+        $query->bindParam(':locationName', $locationName);
+        $query->bindParam(':creatorsId', $nerdID);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        if (empty($results)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      *
      */
-    function addLocation(){
+        function addLocation($locationName, $locationNotes, $enemiesArray){
+            $nerd = unserialize(getIfContains("NERD"));
+            $connection = $this->getConnection();
+            $nerdID = $nerd->getId();
 
+            echo $locationName . " " . $locationNotes . " " . print_r($enemiesArray);
+
+            $query = $connection->prepare("Insert Into locations (creatorsId, locationName, locationNotes, locationImage) VALUES (:creatorsId, :locationName, :locationNotes ,:locationImage ) ");
+            $query->bindParam(':creatorsId' , $nerdID );
+            $query->bindParam(':locationName' , $locationName );
+            $query->bindParam(':locationNotes' , $locationNotes );
+            $image = null;
+            $query->bindParam(':locationImage', $image);
+            $query->execute();
+
+            $connection2 = $this->getConnection();
+            $query2 = $connection2->prepare("Select locationId FROM locations WHERE locationName = :locationName and creatorsId = :creatorsId");
+            $query2->bindParam(':locationName', $locationName);
+            $query2->bindParam(':creatorsId', $nerdID);
+            $locationId = null;
+            try {
+                $query2->execute();
+                $results = $query2->fetchAll();
+                $locationId = array_pop($results)['locationId'];
+            }catch(Exception $exception){
+                print($exception->getMessage());
+            }
+
+            foreach($enemiesArray as $id){
+                $connection3 = $this->getConnection();
+                $query3 = $connection3->prepare("Insert Into enemyLocals (locationId, enemyId) VALUES (:locationId, :enemyId) ");
+                $query3->bindParam(':locationId' , $locationId );
+                $query3->bindParam(':enemyId' , $id );
+                $query3->execute();
+            }
+        }
+
+    /**
+     *
+     */
+    function updateLocation($locationId, $locationName, $locationNotes, $enemiesArray){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+
+        $query = $connection->prepare("UPDATE locations SET locationName = :locationName, locationNotes = :locationNotes, locationImage = :locationImage WHERE locationId = :locationId AND creatorsId = :creatorsId  ) ");
+        $query->bindParam(':locationId' , $locationId );
+        $query->bindParam(':creatorsId' , $nerdID );
+        $query->bindParam(':locationName' , $locationName );
+        $query->bindParam(':locationNotes' , $locationNotes );
+        $image = null;
+        $query->bindParam(':locationImage', $image);
+        $query->execute();
+
+        $queryClean = $connection->prepare("Delete From enemyLocals WHERE locationId = :locationId");
+        $queryClean->bindParam(':locationId', $locationId);
+        $queryClean->execute();
+
+        foreach($enemiesArray as $id){
+            $query = $connection->prepare("Insert Into enemyLocals (locationId, enemyId) VALUES (:locationId, :enemyId) ");
+            $query->bindParam(':locationId' , $locationId );
+            $query->bindParam(':enemyId' , $id );
+            $query->execute();
+        }
+    }
+
+    function getLocations(){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+
+        $query = $connection->prepare("SELECT locationId, creatorsId, locationName, locationNotes, locationImage FROM locations WHERE creatorsId = :creatorsId  ) ");
+        $query->bindParam(':creatorsId' , $nerdID );
+
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+
+        $locationArray = array();
+        foreach($results as $row){
+            $connection = $this->getConnection();
+
+            $query = $connection->prepare("SELECT enemyId FROM enemyLocals WHERE locationId = :locationId  ) ");
+            $query->bindParam(':locationId' , $row["locationId"] );
+
+            $resultsInner = null;
+            try {
+                $query->execute();
+                $resultsInner = $query->fetchAll();
+            }catch(Exception $exception){
+                print($exception->getMessage());
+            }
+
+            $enemies = array();
+            foreach ($resultsInner as $rowInner){
+                array_push($enemies, $rowInner["enemyId"]);
+            }
+            $enemyList = $this->getSpecificEnemies($enemies);
+            $location = new Location($row["locationId"], $row["locationName"], $enemyList, $row["locationNotes"], $row["image"]);
+            array_push($locationArray, $location);
+        }
     }
 }

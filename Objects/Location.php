@@ -2,14 +2,14 @@
 
 class Location
 {
-    private $campaignSection;
-    private $locationName;
-    private $listOfEnemies;
-    private $notes;
+    public $locationId;
+    public $locationName;
+    public $listOfEnemies;
+    public $notes;
 
 
-    public function init( $locationName, $listOfEnemies, $notes, $campaignSection){
-        $this->$campaignSection = $campaignSection;
+    public function init($locationId, $locationName, $listOfEnemies, $notes){
+        $this->$locationId = $locationId;
         $this->$locationName = $locationName;
         $this->$notes = $notes;
         $this->$listOfEnemies = $listOfEnemies;

@@ -1,7 +1,7 @@
 <?php
 $thisPage = "loginForm";
 include_once("../lib/pageHeader.php");
-echo print_r($_SESSION,1);
+//echo print_r($_SESSION,1);
 echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</h1>
         <form action='createCreatureHandler.php' method='post'>
         <dl>
@@ -133,7 +133,7 @@ echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</
         
         
         <dt>Notes:<span class='formNotes'>*1000 Character max</span></dt>
-        <dd><textarea name='textarea' rows='10' cols='30' form='creatureForm'>". getIfContains('prevValues', 'notes', '') ."</textarea></dd>
+        <dd><textarea name='notes' rows='10' cols='30' form='creatureForm'>". getIfContains('prevValues', 'notes', '') ."</textarea></dd>
         
         ";
         //<dt>Image:</dt>

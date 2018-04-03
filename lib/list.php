@@ -8,6 +8,14 @@ function createCheckboxList($checkboxList){
     }
 }
 
+function createNamedCheckboxList($nameArray, $idArray, $prefix, $prevValues){
+    for($i = 0 ; $i < sizeof($nameArray) ; $i = $i + 1 ){
+        $name = $prefix."".$idArray[$i];
+        $checked = isset($prevValues[$name]) ? 'checked' : '';
+        echo "<div class='listItem'><input type='checkbox' name=$name value=$idArray[$i] $checked>$nameArray[$i] </div>";
+    }
+}
+
 function createLocationsOption( $locationList){
     foreach($locationList as $location ) {
         echo "<option value=$location >$location</option> ";

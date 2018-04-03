@@ -185,7 +185,7 @@ function setEnemyForSession($enemy){
     $prevValues['id'] = $id;
 
     $name = $enemy->name;
-    $prevValues['name'] = $name;
+    $prevValues['name'] = htmlspecialchars($name);
 
     //contains armorClass, attack, initiative, size, challengeRating, enemyType
     $baseStatsArray = $enemy->baseStatsArray;
@@ -258,8 +258,8 @@ function setEnemyForSession($enemy){
     $weaponsMap = isset($enemy->weaponsArray) ? $enemy->weaponsArray : array();
     $weaponNumber = 1;
     foreach($weaponsMap as $weapon => $value){
-        $prevValues["weapon".$weaponNumber] = $weapon;
-        $prevValues["damage".$weaponNumber] = $value;
+        $prevValues["weapon".$weaponNumber] = htmlspecialchars($weapon);
+        $prevValues["damage".$weaponNumber] = htmlspecialchars($value);
         $weaponNumber = $weaponNumber + 1;
     }
 
@@ -267,8 +267,8 @@ function setEnemyForSession($enemy){
     $itemsMap = $enemy->itemsMap;
     $itemNumber = 1;
     foreach($itemsMap as $item => $value){
-        $prevValues["item".$itemNumber] = $item;
-        $prevValues["value".$itemNumber] = $value;
+        $prevValues["item".$itemNumber] = htmlspecialchars($item);
+        $prevValues["value".$itemNumber] = htmlspecialchars($value);
         $itemNumber = $itemNumber + 1;
     }
 
@@ -277,8 +277,8 @@ function setEnemyForSession($enemy){
     $abilitiesMap = $enemy->abilitiesMap;
     $abilityNumber = 1;
     foreach($abilitiesMap as $ability => $value){
-        $prevValues["ability".$abilityNumber] = $ability;
-        $prevValues["abilityNote".$abilityNumber] = $value;
+        $prevValues["ability".$abilityNumber] = htmlspecialchars($ability);
+        $prevValues["abilityNote".$abilityNumber] = htmlspecialchars($value);
         $abilityNumber = $itemNumber + 1;
     }
 
@@ -286,12 +286,12 @@ function setEnemyForSession($enemy){
     $spellsMap = $enemy->spellsMap;
     $spellNumber = 1;
     foreach($spellsMap as $spell => $value){
-        $prevValues["spell".$spellNumber] = $spell;
-        $prevValues["spellNote".$spellNumber] = $value;
+        $prevValues["spell".$spellNumber] = htmlspecialchars($spell);
+        $prevValues["spellNote".$spellNumber] = htmlspecialchars($value);
         $spellNumber = $spellNumber + 1;
     }
 
-    $prevValues["notes"] = $enemy->notes;
+    $prevValues["notes"] = htmlspecialchars($enemy->notes);
 
     $image = null;
 
