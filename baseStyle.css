@@ -196,6 +196,10 @@ body {
     color: silver;
 }
 
+.profileName:visited .profileName:link{
+    color:silver;
+}
+
 .footer{
     background:linear-gradient(darkslategray, silver, darkslategrey);
 }
@@ -262,13 +266,14 @@ body {
     background: linear-gradient(to bottom right, #c0c0cc, #8080aa);
     border: inset silver;
     border-radius: 10px;
-    width: 45%;
+    width: 44%;
     margin: 2.2%;
     margin-top: 25px;
     min-height: 244px;
     position: relative;
     max-width: 700px;
     padding: 3px;
+    min-width: 500px
 }
 
 .tileContainer:before{
@@ -288,6 +293,12 @@ body {
     background: linear-gradient(to bottom right, rgba(25,100,45,0.6), rgba(45,150,75,0.6));
     max-width: 100%;
     min-width: 100%;
+}
+
+.editbtn{
+    margin: 4px;
+    background-color: silver;
+
 }
 
 .listItem{

@@ -26,6 +26,10 @@
       $name = $enemy->name;
       echo "<div class='tileContainer'>
         <div class='inlineList thinForm widthDiv titleHighlight'>
+            <div><form class='thinForm' action='../forms/editCreatureHandler.php' method='post'>
+                <input type='hidden' name='enemyId' value=". $enemy->id.">
+                <button type='submit' name='enemyEdit' class='editBtn'>Edit</button>
+            </form></div>
             <div class='inlineContainer'></div><div class='centerDiv'>".htmlspecialchars($name)."</div><div class='inlineContainer'></div>
         </div>
             <div class='inlineList widthDiv internalTile'>

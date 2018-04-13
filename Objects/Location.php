@@ -8,11 +8,10 @@ class Location
     public $notes;
 
 
-    public function init($locationId, $locationName, $listOfEnemies, $notes){
+    public function init($locationId, $locationName, $notes){
         $this->$locationId = $locationId;
         $this->$locationName = $locationName;
         $this->$notes = $notes;
-        $this->$listOfEnemies = $listOfEnemies;
     }
 
 

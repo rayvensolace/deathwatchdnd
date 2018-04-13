@@ -14,8 +14,14 @@ if(!isset($_POST["name"]) || empty(trim($_POST["name"]))){
         $errors["name"] = "Must enter a unique name";
 }else{
     $name = $_POST["name"];
-    if(! $dao->checkEnemyAvailability($name)){
-        $errors["name"] = "There already exists an enemy with that name";
+    if($enemy->id == 0) {
+        if (!$dao->checkEnemyAvailability($name, $enemy->id)) {
+            $errors["name"] = "There already exists an enemy with that name";
+        }
+    }else{
+        if(!$dao->checkValidEnemy($enemy->name, $enemy->id)){
+            $errors["name"] = "Error while attempting to update enemy";
+        }
     }
 }
 

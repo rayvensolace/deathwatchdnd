@@ -184,20 +184,43 @@ class Dao
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
         //echo $username;
-        $query = $connection->prepare("Select enemyId FROM enemies WHERE enemyName = :enemyName and creatorsId = :creatorsId");
+            $query = $connection->prepare("Select enemyId FROM enemies WHERE enemyName = :enemyName and creatorsId = :creatorsId");
+            $query->bindParam(':enemyName', $enemyname);
+            $query->bindParam(':creatorsId', $nerdID);
+            $results = null;
+            try {
+                $query->execute();
+                $results = $query->fetchAll();
+            } catch (Exception $exception) {
+                print($exception->getMessage());
+            }
+            if (empty($results)) {
+                return true;
+            } else {
+                return false;
+            }
+
+    }
+
+    function checkValidEnemy($enemyname, $id){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        $query = $connection->prepare("Select enemyId FROM enemies WHERE enemyId = :enemyId and enemyName = :enemyName and creatorsId = :creatorsId");
+        $query->bindParam(':enemyId', $id);
         $query->bindParam(':enemyName', $enemyname);
         $query->bindParam(':creatorsId', $nerdID);
         $results = null;
         try {
             $query->execute();
             $results = $query->fetchAll();
-        }catch(Exception $exception){
+        } catch (Exception $exception) {
             print($exception->getMessage());
         }
         if (empty($results)) {
-            return true;
-        }else{
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -393,6 +416,7 @@ class Dao
         foreach($enemyIdArray as $enemyId){
             $enemyListString = $enemyListString.",".$enemyId;
         }
+        echo "ENEMY LIST TO PULL FROM DB " . $enemyListString. "<br>";
         $nerd = unserialize(getIfContains("NERD"));
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
@@ -403,12 +427,31 @@ class Dao
         $query->bindParam(":enemyListString", $enemyListString);
         $query->execute();
         $results = $query->fetchAll();
+        echo "Enemy Array Results " . print_r($results, 1). "<br>";
         $enemies = array();
         foreach($results as $rs){
             $enemy = createEnemyFromDatabaseRow($rs);
             array_push($enemies,$enemy);
         }
+        echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
         return $enemies;
+    }
+
+    function getEnemy($enemyId){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        $query = $connection->prepare("Select 
+                                enemyId,creatorsId, enemyName, challengeRating, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage 
+                                FROM enemies WHERE creatorsId = :creatorsId AND enemyId = :enemyId");
+        $query->bindParam(':creatorsId',$nerdID);
+        $query->bindParam(":enemyId", $enemyId);
+        $query->execute();
+        $results = $query->fetch();
+        echo "Enemy Array Results " . print_r($results, 1). "<br>";
+        $enemy = createEnemyFromDatabaseRow($results);
+        echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
+        return $enemy;
     }
 
     /**
@@ -527,26 +570,9 @@ class Dao
 
         $locationArray = array();
         foreach($results as $row){
-            $connection = $this->getConnection();
-
-            $query = $connection->prepare("SELECT enemyId FROM enemyLocals WHERE locationId = :locationId  ) ");
-            $query->bindParam(':locationId' , $row["locationId"] );
-
-            $resultsInner = null;
-            try {
-                $query->execute();
-                $resultsInner = $query->fetchAll();
-            }catch(Exception $exception){
-                print($exception->getMessage());
-            }
-
-            $enemies = array();
-            foreach ($resultsInner as $rowInner){
-                array_push($enemies, $rowInner["enemyId"]);
-            }
-            $enemyList = $this->getSpecificEnemies($enemies);
             $location = new Location($row["locationId"], $row["locationName"], $enemyList, $row["locationNotes"], $row["image"]);
             array_push($locationArray, $location);
         }
+        return $locationArray;
     }
 }
