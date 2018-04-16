@@ -58,6 +58,12 @@
                 echo "<li>".htmlspecialchars($spell).": ".htmlspecialchars($value)."</li>";
             }
 
+            echo "<li class='listSectionHeader'>Weapons</li>";
+            $weaponsMap = $enemy->weaponsMap;
+            foreach($weaponsMap as $weapon => $value){
+                echo "<li>".htmlspecialchars($weapon).": ".htmlspecialchars($value)."</li>";
+            }
+
           echo "    </dl>    
                 </div>
                 <div class='descriptionColumn'>

@@ -8,7 +8,7 @@ checkSession($thisPage)
     <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Contrail+One" rel="stylesheet">
     <link rel="stylesheet" href="/baseStyle.css">
-
+    <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <!--    --><?php

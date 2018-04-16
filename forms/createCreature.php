@@ -1,8 +1,10 @@
 <?php
 $thisPage = "loginForm";
 include_once("../lib/pageHeader.php");
+
 //echo print_r($_SESSION,1);
-echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</h1>
+echo   "
+        <div class = 'formBackground'><h1 class='formHeader'>Create a Creature</h1>
         <form action='createCreatureHandler.php' method='post' id='creatureForm'>
         <dl>
         <dd><div>Name of Creature:<input type='text' name='name' value='".getIfContains('prevValues', 'name', '')."'><span class ='formNotes'>*Required</span></div>
@@ -114,23 +116,30 @@ echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Creature</
         <dd><div>Use Magic Device:<input type='number' name='useMagicDevice' value='". getIfContains('prevValues', 'useMagicDevice', 0) ."'></div></dd>
         <dd><div>Use Rope:<input type='number' name='useRope' value='". getIfContains('prevValues', 'useRope', 0) ."'></div></dd>
         <div></div>
-        
+        <script src='../js/creatureForm.js'></script>
         <dt>Weapons:</dt>
         <dd><div>Weapon Name:<input type='text' name='weapon1' value='". htmlspecialchars(getIfContains('prevValues', 'weapon1', 'dagger')) ."'></div>
-        <div>Damage/Note:<input type='text' name='damage1' value='". htmlspecialchars(getIfContains('prevValues', 'damage1', '1d4')) ."'></div></dd>
+        <div id='weaponForm1'>Damage/Note:<input type='text' name='damage1' value='". htmlspecialchars(getIfContains('prevValues', 'damage1', '1d4')) ."'></div></dd>
+        
+        <div><button id='weaponExpansion'>+</button></div>
         
         <dt>Items:</dt>
         <dd><div>Item Name:<input type='text' name='item1' value='". htmlspecialchars(getIfContains('prevValues', 'item1', 'Gold Pieces')) ."'></div>
-        <div>Value/Note:<input type='text' name='value1' value='". htmlspecialchars(getIfContains('prevValues', 'value1', '100')) ."'></div></dd>
+        <div id='itemForm1'>Value/Note:<input type='text' name='value1' value='". htmlspecialchars(getIfContains('prevValues', 'value1', '100')) ."'></div></dd>
+        
+        <div><button id='itemExpansion'>+</button></div>
         
         <dt>Abilities:</dt>
         <dd><div>Ability Name:<input type='text' name='ability1' value='". htmlspecialchars(getIfContains('prevValues', 'ability1', '')) ."'></div>
-        <div>Note:<input type='text' name='abilityNote1' value='". htmlspecialchars(getIfContains('prevValues', 'abilityNote1', '')) ."'></div></dd>
+        <div id='abilityForm1'>Note:<input type='text' name='abilityNote1' value='". htmlspecialchars(getIfContains('prevValues', 'abilityNote1', '')) ."'></div></dd>
+        
+        <div><button id='abilityExpansion'>+</button></div>
         
         <dt>Spells:</dt>
         <dd><div>Spell Name:<input type='text' name='spell1' value='". htmlspecialchars(getIfContains('prevValues', 'spell1', '')) ."'></div>
-        <div>Prepared/Note:<input type='text' name='spellNote1' value='". htmlspecialchars(getIfContains('prevValues', 'spellNote1', '')) ."'></div></dd>
+        <div id='spellForm1'>Prepared/Note:<input type='text' name='spellNote1' value='". htmlspecialchars(getIfContains('prevValues', 'spellNote1', '')) ."'></div></dd>
         
+        <div><button id='spellExpansion'>+</button></div>
         
         <dt>Notes:<span class='formNotes'>*1000 Character max</span></dt>
         <dd><textarea name='notes' rows='10' cols='30' form='creatureForm'>". htmlspecialchars(getIfContains('prevValues', 'notes', '')) ."</textarea></dd>
