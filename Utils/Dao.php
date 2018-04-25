@@ -420,7 +420,7 @@ class Dao
         foreach($enemyIdArray as $enemyId){
             $enemyListString = $enemyListString.",".$enemyId;
         }
-        echo "ENEMY LIST TO PULL FROM DB " . $enemyListString. "<br>";
+       // echo "ENEMY LIST TO PULL FROM DB " . $enemyListString. "<br>";
         $nerd = unserialize(getIfContains("NERD"));
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
@@ -431,13 +431,13 @@ class Dao
         $query->bindParam(":enemyListString", $enemyListString);
         $query->execute();
         $results = $query->fetchAll();
-        echo "Enemy Array Results " . print_r($results, 1). "<br>";
+       // echo "Enemy Array Results " . print_r($results, 1). "<br>";
         $enemies = array();
         foreach($results as $rs){
             $enemy = createEnemyFromDatabaseRow($rs);
             array_push($enemies,$enemy);
         }
-        echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
+        //echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
         return $enemies;
     }
 
@@ -485,7 +485,7 @@ class Dao
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
 
-        echo $sectionName . " " . $sectionNotes . " " . print_r($locationArray);
+       // echo $sectionName . " " . $sectionNotes . " " . print_r($locationArray);
 
         $query = $connection->prepare("Insert Into sections (creatorsId, sectionName, sectionNotes, sectionImage) VALUES (:creatorsId, :sectionName, :sectionNotes ,:sectionImage ) ");
         $query->bindParam(':creatorsId' , $nerdID );
@@ -522,7 +522,7 @@ class Dao
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
 
-        echo $sectionName . " " . $sectionNotes . " " . print_r($locationArray);
+       // echo $sectionName . " " . $sectionNotes . " " . print_r($locationArray);
 
         $query = $connection->prepare("UPDATE sections SET sectionName = :sectionName, sectionNotes = :sectionNotes, sectionImage = :sectionImage WHERE sectionId = :sectionId AND creatorsId = :creatorsId  ) ");
         $query->bindParam(':sectionId' , $sectionId );
@@ -643,7 +643,7 @@ class Dao
             $connection = $this->getConnection();
             $nerdID = $nerd->getId();
 
-            echo $locationName . " " . $locationNotes . " " . print_r($enemiesArray);
+           // echo $locationName . " " . $locationNotes . " " . print_r($enemiesArray);
 
             $query = $connection->prepare("Insert Into locations (creatorsId, locationName, locationNotes, locationImage) VALUES (:creatorsId, :locationName, :locationNotes ,:locationImage ) ");
             $query->bindParam(':creatorsId' , $nerdID );
