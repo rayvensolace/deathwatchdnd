@@ -17,9 +17,10 @@ function createNamedCheckboxList($nameArray, $idArray, $prefix, $prevValues){
     }
 }
 
-function createLocationsOption( $locationListMap){
+function createLocationsOption( $locationListMap, $checkedLocationId){
     foreach($locationListMap as $locationId => $locationName ) {
-        echo "<option value=$locationId >$locationName</option> ";
+        $selected = $locationId == $checkedLocationId ? 'selected' : '';
+        echo "<option value=$locationId $selected>$locationName</option> ";
     }
 }
 
