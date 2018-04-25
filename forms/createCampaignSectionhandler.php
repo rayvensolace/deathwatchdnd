@@ -7,7 +7,7 @@ include_once("../Utils/EnemyBuilder.php");
 checkSession("createCreatureHandler");
 $dao = new Dao();
 
-echo print_r($_POST,1);
+//echo print_r($_POST,1);
 $errors = array();
 
 if(!isset($_POST["sectionName"]) || empty(trim($_POST["sectionName"]))){
