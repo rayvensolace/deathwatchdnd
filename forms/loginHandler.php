@@ -4,7 +4,7 @@ include_once("../Utils/Validators.php");
 include_once("../Objects/Nerd.php");
 include_once("../Utils/KLogger.php");
 
-echo print_r($_POST,1) . "<br>";
+//echo print_r($_POST,1) . "<br>";
 $errors = array();
 if(!isset($_POST["user"]) || empty(trim($_POST["user"]))){
     echo "no user <br>";
@@ -32,10 +32,10 @@ if (!count($errors) ){
         setcookie("validation", $nerd->getSecret(), time() + 60*60*24, "/");
         $_SESSION["NERD"] = serialize($nerd);
 
-        echo print_r($_POST, true);
+        //echo print_r($_POST, true);
         print_r($_POST, true);
-        echo print_r($nerd,1) . "<br>";
-        echo print_r($_COOKIE,1) . "<br>";
+        //echo print_r($nerd,1) . "<br>";
+        //echo print_r($_COOKIE,1) . "<br>";
 
         header('Location:../content/Videos.php');
 }else {
