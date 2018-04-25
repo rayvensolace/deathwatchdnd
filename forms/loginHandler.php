@@ -29,7 +29,7 @@ if(!$nerd){
 
 if (!count($errors) ){
         //$nerd = new Nerd($_POST['user'], 1,"usersemail@wherever.com",$_POST['user'] . "'sSecretUserCookieCode" , 7);
-        setcookie("validation", $nerd->getSecret(), time() + 60*60, "/");
+        setcookie("validation", $nerd->getSecret(), time() + 60*60*24, "/");
         $_SESSION["NERD"] = serialize($nerd);
 
         echo print_r($_POST, true);

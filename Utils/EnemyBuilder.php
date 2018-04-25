@@ -12,6 +12,7 @@ function createEnemyFromPost(){
 
     //contains armorClass, attack, initiative, size, challengeRating, enemyType
     $baseStatsArray = array();
+    $baseStatsArray['hp'] =$_POST['hp'];
     $baseStatsArray['armorClass'] = $_POST['armorClass'];
     $baseStatsArray['attack'] = $_POST['attack'];
     $baseStatsArray['initiative'] = $_POST['initiative'];
@@ -126,6 +127,7 @@ function createEnemyFromDatabaseRow($rs){
 
     //contains armorClass, attack, initiative, size, challengeRating, enemyType
     $baseStatsArray = array();
+    $baseStatsArray['hp'] = $rs['hp'];
     $baseStatsArray['armorClass'] = $rs['armorClass'];
     $baseStatsArray['attack'] = $rs['attack'];
     $baseStatsArray['initiative'] = $rs['initiative'];
@@ -189,6 +191,7 @@ function setEnemyForSession($enemy){
 
     //contains armorClass, attack, initiative, size, challengeRating, enemyType
     $baseStatsArray = $enemy->baseStatsArray;
+    $prevValues['hp'] = $baseStatsArray['hp'];
     $prevValues['armorClass'] = $baseStatsArray['armorClass'];
     $prevValues['attack'] = $baseStatsArray['attack'];
     $prevValues['initiative'] = $baseStatsArray['initiative'];

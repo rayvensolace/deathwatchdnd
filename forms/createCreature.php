@@ -11,6 +11,7 @@ echo   "
         <div>". htmlspecialchars(getIfContains('errorMessages', 'name', '')) ."</div></dd>
         <div  ><input type='hidden' name='id' value='". getIfContains('prevValues', 'id', 0) ."'></div>        
         <dt>Attributes:</dt>
+        <dd>HP:<input type='number' name='hp' value='". getIfContains('prevValues', 'hp', 10) ."'></dd>
         <dd>AC:<input type='number' name='armorClass' value='". getIfContains('prevValues', 'armorClass', 10) ."'></dd>
         <dd>Attack:<input type='number' name='attack' value='". getIfContains('prevValues', 'attack', 0) ."'></dd>
         <dd>Initiative:<input type='number' name='initiative' value='". getIfContains('prevValues', 'initiative', 0) ."'></dd>

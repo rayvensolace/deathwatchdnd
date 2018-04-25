@@ -7,7 +7,7 @@ class Enemy
 
     public $name;
 
-    //contains armorClass, attack, initiative, size, challengeRating, enemyType
+    //contains hp, armorClass, attack, initiative, size, challengeRating, enemyType
     public $baseStatsArray;
 
     //contains strength,dexterity,constitution,intelligence,wisdom,charisma

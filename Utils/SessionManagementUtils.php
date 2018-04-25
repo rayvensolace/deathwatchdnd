@@ -1,6 +1,9 @@
 <?php
 session_start();
 include_once("../Objects/Nerd.php");
+include_once("../Objects/Location.php");
+include_once("../Objects/CampaignSection.php");
+include_once("../Objects/Campaign.php");
 //print_r(isset($_COOKIE) ? isset($_COOKIE["validation"])? $_COOKIE["validation"]: "There is no validation in Cookie <br>" : "There is no Cookie <br><br>");
 
 
@@ -88,7 +91,39 @@ function getIfContains($indexInSession, $indexInIndex = null, $default = null){
             return is_null($default) ? null : $default;
         }
     }
+}
 
+function addLocation($location, $enemiesIdArray){
+    $prevValues = array();
+    $prevValues['locationNotes'] = $location->locationNotes;
+    $prevValues['locationName'] = $location->locationName;
+    $prevValues['locationId'] = $location->locationId;
+    $prevEnemies = array();
+    foreach($enemiesIdArray as $id){
+        $name = "enemyId".$id;
+        $prevEnemies[$name] = $id;
+    }
+    $prevValues['enemiesArray'] = $prevEnemies;
+    $_SESSION['prevValues'] = $prevValues;
+    return $prevValues;
+}
+
+function addSection($campaignSection, $locationIdArray){
+    $prevValues['sectionId'] = $campaignSection->sectionId;
+    $prevValues['parentCampaign'] = $campaignSection->parentCampaign;
+    $prevValues['sectionName'] = $campaignSection->sectionName;
+    $prevValues['sectionNotes'] = $campaignSection->sectionNotes;
+    $prevLocations = array();
+    foreach($locationIdArray as $id){
+        $name = "locationId".$id;
+        $prevLocations[$name] = $id;
+    }
+    $prevValues['locationsArray'] = $prevLocations;
+    $_SESSION['prevValues'] = $prevValues;
+    return $prevValues;
+}
+
+function addCampaign($campaign){
 
 }
 

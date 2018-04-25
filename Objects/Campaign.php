@@ -1,22 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rayve
- * Date: 2/26/2018
- * Time: 5:56 PM
- */
 
 class Campaign
 {
 
-    private $campaignName;
-    private $listOfSections;
+    public $campaign;
+    public $campaignName;
+    public $notes;
 
-    public function init($campaignName, $listOfSections){
-        $this->$campaignName = $campaignName;
-        $this->$listOfSections = $listOfSections;
+
+    public function __construct($campaign, $campaignName, $listOfSections){
+        $this->campaign = $campaign;
+        $this->campaignName = $campaignName;
+        $this->listOfSections = $listOfSections;
     }
 
 
+
+}
+
+function addToSession($campaign){
 
 }

@@ -2,18 +2,30 @@
 $thisPage = "campaignForm";
 include_once("../lib/pageHeader.php");
 include_once("../lib/list.php");
+include_once("../Utils/Dao.php");
+
 echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Campaign Section</h1>
 
-        <form class='thinForm' action='createCampaignSectionHandler.php' method='post'>
-        <div>Name of Section: <input type='text' name='locationName'><span class = 'formNotes'>*Required: Once set cannot be changed</span></div>
-        <div>Type in what you want to know for this section:<p></p><textarea name='textarea' rows='30' cols='100' form='campaignForm'></textarea>
+        <form class='thinForm' action='createCampaignSectionHandler.php' id='campaignForm' method='post'>
+        <div><input type='hidden' name='sectionId' value='". getIfContains('prevValues', 'sectionId', 0) ."'></div>        
+        <div>Name of Section: <input type='text' name='sectionName' value='". getIfContains('prevValues', 'sectionName', '') ."'>
+        <span class = 'formNotes'>".getIfContains('errorMessages', 'sectionName', "*Required: must be unique")."</span></div>
+        <div>Type in what you want to know for this section:<p></p><textarea name='sectionNotes' rows='30' cols='100' form='campaignForm'>". htmlspecialchars(getIfContains('prevValues', 'sectionNotes', "")) ."</textarea>
         </div>
         <div class=''>What locations are there in this section:";
-                   $list;
-                    for($i = 1; $i < 15 ; $i++){
-                        $list[$i] = "Location ".$i;
-                    }
-                    createCheckboxList($list);
+$dao = new Dao();
+$locationList = $dao->getLocations();
+$nameList = array();
+$idList = array();
+$index = 0;
+foreach($locationList as $location){
+    $id = $location->locationId;
+    $name = $location->locationName;
+    $nameList[$index] = $name;
+    $idList[$index] = $id;
+    $index = $index + 1;
+}
+createNamedCheckboxList($nameList, $idList, "locationId", getIfContains('prevValues','locationsArray',array()));
  echo"       </div>
         <div><input type='submit' value='Submit'></div>
      </form>
@@ -26,3 +38,6 @@ echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Campaign S
         </div>
         <div class='inlineContainer'></div></footer>
 </html>";
+
+unset($_SESSION['errorMessages']);
+unset($_SESSION['prevValues']);

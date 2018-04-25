@@ -2,18 +2,15 @@
 
 class CampaignSection
 {
-    private $parentSection;
-    private $sectionName;
-    private $notesSection = "";
-    private $listOfLocations;
+    public $sectionId;
+    public $parentCampaign;
+    public $sectionName;
+    public $sectionNotes;
 
-    public function init($notesSection , $listOfLocations){
-        $this->$notesSection = $notesSection;
-        $this->$listOfLocations = $listOfLocations;
+    public function __construct($sectionId, $parentCampaign, $sectionName, $sectionNotes){
+        $this->sectionId = $sectionId;
+        $this->parentCampaign = $parentCampaign;
+        $this->sectionName = $sectionName;
+        $this->sectionNotes = $sectionNotes;
     }
-
-
-
-
-
 }

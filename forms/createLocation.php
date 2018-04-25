@@ -8,13 +8,14 @@ include_once("../Utils/Dao.php");
 
 echo   "<div class = 'formBackground'>
         <h1 class='formHeader'>Create a Location</h1>
-        <form class='thinForm' action='createLocationHandler.php' method='post'>
+        <form class='thinForm' action='createLocationHandler.php' id='locationForm' method='post'>
         <div  ><input type='hidden' name='locationId' value='". getIfContains('prevValues', 'locationId', 0) ."'></div>
         <div>Name of Location: <input type='text' name='locationName' value='".htmlspecialchars(getIfContains('prevValues', 'locationName', "")) ."'>
             <span class = 'formNotes'>".getIfContains('errorMessages', 'locationName', "*Required: must be unique")."</span></div>
         
         <div>Type in what you want to know for this location:
-        <p></p><textarea name='notes' rows='10' cols='30' value='".htmlspecialchars(getIfContains('prevValues', 'notes', "")) ."'></textarea>
+        <p></p><textarea name='notes' rows='10' cols='30' form='locationForm' >". htmlspecialchars(getIfContains('prevValues', 'locationNotes', "")) ."</textarea>
+        
         </div>
         <div class=''>What enemies are there in this section:";
     $dao = new Dao();

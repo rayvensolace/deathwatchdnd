@@ -35,18 +35,21 @@ if(empty($errors)) {
     }
     header("Location:../content/Campaigns.php");
 }else {
-    $prevValues = array();
+//    $prevValues = array();
     echo 'returning to create';
-    $prevValues['notes'] = $_POST['notes'];
-    $prevValues['locationName'] = $_POST['locationName'];
-    $prevValues['locationId'] = $_POST['locationId'];
-    $prevEnemies = array();
-    foreach($enemiesIdArray as $id){
-        $name = "enemyId".$id;
-        $prevEnemies[$name] = $id;
-    }
-    $prevValues['enemiesArray'] = $prevEnemies;
-    $_SESSION['prevValues'] = $prevValues;
+    $location = new Location($_POST['locationId'],$_POST['locationName'],$_POST['notes']);
+    addLocation($location, $enemiesIdArray);
+//    $prevValues['notes'] = $_POST['notes'];
+//    $prevValues['locationName'] = $_POST['locationName'];
+//    $prevValues['locationId'] = $_POST['locationId'];
+//
+//    $prevEnemies = array();
+//    foreach($enemiesIdArray as $id){
+//        $name = "enemyId".$id;
+//        $prevEnemies[$name] = $id;
+//    }
+//    $prevValues['enemiesArray'] = $prevEnemies;
+//    $_SESSION['prevValues'] = $prevValues;
     $_SESSION["errorMessages"] = $errors;
     header("Location:../forms/createLocation.php");
 }

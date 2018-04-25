@@ -9,6 +9,7 @@ function createCheckboxList($checkboxList){
 }
 
 function createNamedCheckboxList($nameArray, $idArray, $prefix, $prevValues){
+    //echo print_r($prevValues,1);
     for($i = 0 ; $i < sizeof($nameArray) ; $i = $i + 1 ){
         $name = $prefix."".$idArray[$i];
         $checked = isset($prevValues[$name]) ? 'checked' : '';
@@ -28,10 +29,19 @@ function createVerticalList($listOfItems){
     }
 }
 
-function createRadialList($listOfRadials, $group)
+//function createRadialList($listOfRadials, $group)
+//{
+//    foreach ($listOfRadials as $radial) {
+//        echo "<div><input type='radio' name='$group' value='preg_replace('/\s+/', '', $radial)>$radial</div>";
+//    }
+//}
+
+function createRadialList($mapOfRadials, $group, $checkedName)
 {
-    foreach ($listOfRadials as $radial) {
-        echo "<div><input type='radio' name='$group' value='preg_replace('/\s+/', '', $radial)>$radial</div>";
+    //echo "<br>".print_r($mapOfRadials)."<br>";
+    foreach ($mapOfRadials as $radial => $name) {
+        $checked = $name == $checkedName ? 'checked = \'checked\'':'';
+        echo "<div><input type='radio' name=$group value=$radial $checked>$name</div>";
     }
 }
 

@@ -295,6 +295,14 @@ body {
     min-width: 100%;
 }
 
+#sectionTitle{
+    background: linear-gradient(to bottom right,  rgba(50,50,140,0.6), rgba(0,200,200,0.6));
+}
+
+#locationTitle{
+    background: linear-gradient(to bottom right,  rgba(50,50,140,0.6), rgba(0,200,200,0.6));
+}
+
 .editbtn{
     margin: 4px;
     background-color: silver;
