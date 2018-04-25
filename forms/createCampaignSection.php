@@ -6,7 +6,7 @@ include_once("../Utils/Dao.php");
 
 echo   "<div class = 'formBackground'><h1 class='formHeader'>Create a Campaign Section</h1>
 
-        <form class='thinForm' action='createCampaignSectionHandler.php' id='campaignForm' method='post'>
+        <form class='thinForm' action='createCampaignSectionhandler.php' id='campaignForm' method='post'>
         <div><input type='hidden' name='sectionId' value='". getIfContains('prevValues', 'sectionId', 0) ."'></div>        
         <div>Name of Section: <input type='text' name='sectionName' value='". getIfContains('prevValues', 'sectionName', '') ."'>
         <span class = 'formNotes'>".getIfContains('errorMessages', 'sectionName', "*Required: must be unique")."</span></div>
