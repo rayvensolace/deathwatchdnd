@@ -5,7 +5,7 @@ include_once("../lib/pageHeader.php");
 include_once("../lib/list.php");
 include_once("../Utils/Dao.php");
 
-
+echo print_r($_SESSION,1);
 echo   "<div class = 'formBackground'>
         <h1 class='formHeader'>Create a Location</h1>
         <form class='thinForm' action='createLocationHandler.php' id='locationForm' method='post'>

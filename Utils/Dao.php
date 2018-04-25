@@ -446,15 +446,15 @@ class Dao
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
         $query = $connection->prepare("Select 
-                                enemyId,creatorsId, enemyName, challengeRating, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage 
+                                enemyId,creatorsId, enemyName, challengeRating, hp, attack,armorClass,size,enemyType,initiative,strength,dexterity,constitution,intelligence,wisdom,charisma,fortitude,reflex,will,skillsArray,weaponsMap,itemsMap,spellsMap,abilitiesMap,notes,enemyImage 
                                 FROM enemies WHERE creatorsId = :creatorsId AND enemyId = :enemyId");
         $query->bindParam(':creatorsId',$nerdID);
         $query->bindParam(":enemyId", $enemyId);
         $query->execute();
         $results = $query->fetch();
-        echo "Enemy Array Results " . print_r($results, 1). "<br>";
+        //echo "Enemy Array Results " . print_r($results, 1). "<br>";
         $enemy = createEnemyFromDatabaseRow($results);
-        echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
+        //echo "Enemy Array Objects " . print_r($enemies,1). "<br>";
         return $enemy;
     }
 
@@ -570,6 +570,49 @@ class Dao
         return $sectionArray;
     }
 
+    function getSection($sectionId){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+
+        $query = $connection->prepare("SELECT sectionId, sectionName, sectionNotes, sectionImage FROM sections WHERE creatorsId = :creatorsId and sectionId = :sectionId  ");
+        $query->bindParam(':creatorsId' , $nerdID );
+        $query->bindParam(':sectionId' , $sectionId );
+
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetch();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        $section = null;
+        $section = new CampaignSection($results['sectionId'], null, $results['sectionName'], $results['sectionNotes']);
+
+        return $section;
+    }
+
+    function getSectionLocationIds($sectionId){
+
+        $connection = $this->getConnection();
+
+        $query = $connection->prepare("SELECT locationId FROM sectionlocals WHERE sectionId = :sectionId");
+        $query->bindParam(':sectionId', $sectionId);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+
+        $enemiesArray = array();
+        foreach($results as $row){
+            array_push($enemiesArray, $row['locationId']);
+        }
+        return $enemiesArray;
+    }
+
     function checkLocationAvailability($locationName){
         $nerd = unserialize(getIfContains("NERD"));
         $connection = $this->getConnection();
@@ -640,7 +683,7 @@ class Dao
         $connection = $this->getConnection();
         $nerdID = $nerd->getId();
 
-        $query = $connection->prepare("UPDATE locations SET locationName = :locationName, locationNotes = :locationNotes, locationImage = :locationImage WHERE locationId = :locationId AND creatorsId = :creatorsId  ) ");
+        $query = $connection->prepare("UPDATE locations SET locationName = :locationName, locationNotes = :locationNotes, locationImage = :locationImage WHERE locationId = :locationId AND creatorsId = :creatorsId  ");
         $query->bindParam(':locationId' , $locationId );
         $query->bindParam(':creatorsId' , $nerdID );
         $query->bindParam(':locationName' , $locationName );
@@ -685,6 +728,98 @@ class Dao
         return $locationArray;
     }
 
+    function getSectionsLocation($sectionId){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
 
+        $query = $connection->prepare("SELECT loc.locationId, loc.locationName, loc.locationNotes, loc.locationImage FROM sectionlocals as sl join locations as loc on sl.locationId = loc.locationId WHERE loc.creatorsId = :creatorsId  and sl.sectionId = :sectionId");
+        $query->bindParam(':creatorsId' , $nerdID );
+        $query->bindParam(':sectionId', $sectionId);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
 
+        $locationArray = array();
+        foreach($results as $row){
+            $location = new Location($row['locationId'], $row['locationName'], $row['locationNotes']);
+            array_push($locationArray, $location);
+        }
+        return $locationArray;
+    }
+
+    function getLocation($locationId){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+
+        $query = $connection->prepare("SELECT locationId, creatorsId, locationName, locationNotes, locationImage FROM locations WHERE creatorsId = :creatorsId and locationId = :locationId  ");
+        $query->bindParam(':creatorsId' , $nerdID );
+        $query->bindParam(':locationId' , $locationId );
+
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetch();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        $location = null;
+        //$locationArray = array();
+        //foreach($results as $row){
+            $location = new Location($results['locationId'], $results['locationName'], $results['locationNotes']);
+            //array_push($locationArray, $location);
+        //}
+        return $location;
+    }
+
+    function getLocationEnemiesIds($locationId){
+
+        $connection = $this->getConnection();
+
+        $query = $connection->prepare("SELECT enemyId FROM enemylocals WHERE locationId = :locationId");
+        $query->bindParam(':locationId', $locationId);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+
+        $enemiesArray = array();
+        foreach($results as $row){
+            array_push($enemiesArray, $row['enemyId']);
+        }
+        return $enemiesArray;
+    }
+
+    function getLocationEnemiesObjects($locationId){
+        $nerd = unserialize(getIfContains("NERD"));
+        $connection = $this->getConnection();
+        $nerdID = $nerd->getId();
+        $query = $connection->prepare("Select 
+                                e.enemyId, e.creatorsId, e.enemyName, e.challengeRating,e.hp, e.attack, e.armorClass,e.size,e.enemyType,e.initiative,e.strength,e.dexterity,e.constitution,e.intelligence,e.wisdom,e.charisma,e.fortitude,e.reflex,e.will,e.skillsArray,e.weaponsMap,e.itemsMap,e.spellsMap,e.abilitiesMap,e.notes,e.enemyImage 
+                                FROM enemylocals as el join enemies as e on el.enemyId = e.enemyId WHERE creatorsId = :creatorsId AND locationId = :locationId");
+        $query->bindParam(':creatorsId',$nerdID);
+        $query->bindParam(":locationId", $locationId);
+        $results = null;
+        try {
+            $query->execute();
+            $results = $query->fetchAll();
+        }catch(Exception $exception){
+            print($exception->getMessage());
+        }
+        //echo "<br>returnedEnemies ".print_r($results,1)."<br>";
+        $enemiesArray = array();
+        foreach($results as $row){
+            $enemy = createEnemyFromDatabaseRow($row);
+            array_push($enemiesArray, $enemy);
+        }
+        return $enemiesArray;
+    }
 }
