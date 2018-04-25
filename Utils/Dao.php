@@ -9,15 +9,15 @@ class Dao
 {
 
 
-    private $host = "localhost";
-    private $db = "deathwatchdnd";
-    private $user = "root";
-    private $pass = "Hope2015";
+//    private $host = "localhost";
+//    private $db = "deathwatchdnd";
+//    private $user = "root";
 
-//    private $host = "us-cdbr-iron-east-05.cleardb.net";
-//    private $db = "heroku_1b423bac23d8d42";
-//    private $user = "b582fc1a10d3d8";
-//    private $pass = "98831eb9";
+
+    private $host = "us-cdbr-iron-east-05.cleardb.net";
+    private $db = "heroku_1b423bac23d8d42";
+    private $user = "b582fc1a10d3d8";
+    private $pass = "98831eb9";
 
     protected $logger;
 
